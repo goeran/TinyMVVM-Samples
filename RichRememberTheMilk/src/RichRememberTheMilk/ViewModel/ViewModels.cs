@@ -14,14 +14,29 @@ namespace RichRememberTheMilk.ViewModel
 
 		//State
 		public ObservableCollection<TaskList> TasksLists { get; set; } 
+		public TaskList SelectedList
+		{
+			get { return _SelectedList; }
+			set
+			{
+				if (value != _SelectedList)
+				{
+					UIInvoker.Invoke(() =>
+					{
+						_SelectedList = value;
+						TriggerPropertyChanged("SelectedList");
+					});
+				}
+			}
+		}
+		private TaskList _SelectedList;
+
 	
 		
 		//Commands
 		
 		public ApplicationContext()
 		{
-	
-			TasksLists = new ObservableCollection<TaskList>();
 		
 			ServiceLocator.SetLocatorIfNotSet(() => ServiceLocator.GetServiceLocator());
 			UIInvoker = ServiceLocator.Instance.GetInstance<IUIInvoker>();
@@ -59,8 +74,6 @@ namespace RichRememberTheMilk.ViewModel
 		
 		public TaskList()
 		{
-	
-			Tasks = new ObservableCollection<Task>();
 		
 			ServiceLocator.SetLocatorIfNotSet(() => ServiceLocator.GetServiceLocator());
 			UIInvoker = ServiceLocator.Instance.GetInstance<IUIInvoker>();
@@ -148,8 +161,6 @@ namespace RichRememberTheMilk.ViewModel
 		
 		public Task()
 		{
-	
-			Due = new DateTime();
 		
 			ServiceLocator.SetLocatorIfNotSet(() => ServiceLocator.GetServiceLocator());
 			UIInvoker = ServiceLocator.Instance.GetInstance<IUIInvoker>();

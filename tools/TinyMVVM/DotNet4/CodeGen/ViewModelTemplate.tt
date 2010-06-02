@@ -1,6 +1,6 @@
-﻿<#@ assembly name="$(SolutionDir)\TinyMVVM\$(OutDir)\TinyMVVM.dll" #>
+﻿<#@ assembly name="$(SolutionDir)..\..\tools\TinyMVVM\DotNet4\TinyMVVM.dll" #>
 <#@ import namespace="TinyMVVM.DSL.TextParser" #>
-<#@ import namespace="TinyMVVM.SemanticModel" #>
+<#@ import namespace="TinyMVVM.SemanticModel.MVVM" #>
 
 <#+
 // <copyright file="ViewModel.tt" company="eXPerience">

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using RichRememberTheMilk.Controllers;
+using RichRememberTheMilk.Desktop.Repositories;
 using RichRememberTheMilk.Repositories;
 
 namespace RichRememberTheMilk.ViewModel
@@ -7,7 +9,8 @@ namespace RichRememberTheMilk.ViewModel
     {
         public void OnInitialize()
         {
-            LoadAllTaskLists();
+            ConfigureDependencies(config => config.Bind<ITaskListRepository>().To<TaskListRepository>());
+            RegisterController<ApplicationContextController>();
         }
 
         private void LoadAllTaskLists()
