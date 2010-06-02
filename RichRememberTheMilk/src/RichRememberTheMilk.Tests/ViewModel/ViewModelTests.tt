@@ -1,0 +1,17 @@
+﻿<#@ template language="C#" hostspecific="True" debug="True" #>
+<#@ output extension="txt" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="$(SolutionDir)..\tools\TinyMVVM\CodeGen\ViewModelTestsTemplate.tt" #>
+<#
+// <copyright file="Tests.tt" company="Microsoft">
+//  Copyright © Microsoft. All Rights Reserved.
+// </copyright>
+	string dslFile = Host.ResolvePath(@"..\..\RichRememberTheMilk.Desktop\ViewModel\ViewModel.mvvm");
+	
+	ViewModelTestsTemplate viewModelTemplate = new ViewModelTestsTemplate();
+	viewModelTemplate.File = dslFile;
+	viewModelTemplate.Output.File = "ViewModelTests.cs";
+	viewModelTemplate.UsingNamespace = "RichRememberTheMilk.ViewModel";
+	viewModelTemplate.Namespace = "RichRememberTheMilk.Tests.ViewModel";
+	viewModelTemplate.Render();
+#>

@@ -1,0 +1,7 @@
+﻿<Window x:Class="RichRememberTheMilk.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Views="clr-namespace:RichRememberTheMilk.WPF.Views" Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Views:ApplicationContextView DataContext="{StaticResource applicationContext}"/>    
+    </Grid>
+</Window>
