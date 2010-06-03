@@ -57,6 +57,9 @@
     <Compile Include="ServiceLocatorForClient.cs" />
     <Compile Include="ViewModel\ApplicationContext.cs" />
     <Compile Include="ViewModel\TaskList.cs" />
+    <Compile Include="ViewModel\ViewModelRepositories.cs">
+      <DependentUpon>viewmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\ViewModels.cs">
       <DependentUpon>viewmodel.tt</DependentUpon>
     </Compile>

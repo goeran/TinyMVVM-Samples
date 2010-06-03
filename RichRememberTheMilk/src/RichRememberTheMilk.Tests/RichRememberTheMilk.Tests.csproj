@@ -75,17 +75,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RichRememberTheMilk\RichRememberTheMilk.csproj">
+      <Project>{2489F7B2-30C2-4C05-9F91-17BB3A9A40B4}</Project>
+      <Name>RichRememberTheMilk</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="ViewModel\ViewModelTests1.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ViewModelTests.tt</DependentUpon>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RichRememberTheMilk\RichRememberTheMilk.csproj">
-      <Project>{2489F7B2-30C2-4C05-9F91-17BB3A9A40B4}</Project>
-      <Name>RichRememberTheMilk</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,6 @@
-﻿<#@ assembly name="$(SolutionDir)\TinyMVVM\$(OutDir)\TinyMVVM.dll" #>
+﻿<#@ assembly name="$(SolutionDir)..\..\tools\TinyMVVM\DotNet4\TinyMVVM.dll" #>
 <#@ import namespace="TinyMVVM.DSL.TextParser" #>
-<#@ import namespace="TinyMVVM.SemanticModel" #>
+<#@ import namespace="TinyMVVM.SemanticModel.MVVM" #>
 
 <#+
 // <copyright file="ViewModelTestsTemplate.tt" company="eXPerience">
@@ -21,8 +21,12 @@ public class ViewModelTestsTemplate : Template
 
 using System;
 using NUnit.Framework;
+using Moq;
 using <#= UsingNamespace#>;
+using TinyMVVM.Repositories;
 using TinyMVVM.Framework.Testing;
+using TinyMVVM.Framework.Testing.Services;
+using TinyMVVM.Framework.Services;
 <#+ foreach (string Using in modelSpec.Usings) {#>
 using <#= Using #>;
 <#+ }#>
@@ -34,26 +38,66 @@ namespace <#= Namespace #>
 	{
 		protected <#= viewModel.Name#> viewModel;
 
+	<#+ foreach (ViewModel vm in modelSpec.ViewModels) {#>
+	protected Mock<IRepository<<#= vm.Name#>>> <#= vm.Name#>RepositoryFake;
+	<#+ }#>
+
 		[SetUp]
 		public void Setup()
 		{
-			ServiceLocator.SetLocator(ServiceLocatorForTesting.GetServiceLocator());
-			
-			Context();
+			<#= viewModel.Name#>.RemoveAllGlobalDependencies();
+			<#= viewModel.Name#>.ConfigureGlobalDependencies(config =>
+			{
+				config.Bind<IUIInvoker>().To<UIInvokerForTesting>();
+
+		<#+ foreach (ViewModel vm in modelSpec.ViewModels) {#>
+		<#= vm.Name#>RepositoryFake = new Mock<IRepository<<#= vm.Name#>>>();
+				config.Bind<IRepository<<#= vm.Name#>>>().ToInstance(<#= vm.Name#>RepositoryFake.Object);
+		<#+ }#>
+
+			});
+
+			Before();
 		}
 
-		public abstract void Context();
+		private void ConfigureRepositories()
+		{
+		}
+
+		/*protected void Given_Repositories_are_configured()
+		{
+			ConfigureRepositories();
+		}
+
+		protected void And_Repositories_are_configured()
+		{
+			ConfigureRepositories();
+		}*/
+
+		protected virtual void Before()
+		{
+		}
+
+		public void Given_dependencies_are_configured(Action<DependencyConfigSemantics> configAction)
+		{
+			<#= viewModel.Name#>.ConfigureGlobalDependencies(configAction);
+		}
 
 		public void Given_<#= viewModel.Name#>_is_created()
 		{
 			viewModel = new <#= viewModel.Name#>();
 		}
 
+		public void Given(string text, Action unitOfWork)
+		{
+			unitOfWork.Invoke();
+		}
+
 		public void And_<#= viewModel.Name#>_is_created()
 		{
 			viewModel = new <#= viewModel.Name#>();
 		}
-		
+
 	<#+ foreach (ViewModelProperty property in viewModel.Properties){#>
 	public void And_<#= property.Name#>_is_set(<#= property.Type#> value)
 		{

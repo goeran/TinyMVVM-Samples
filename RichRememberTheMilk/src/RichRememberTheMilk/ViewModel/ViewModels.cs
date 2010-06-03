@@ -1,17 +1,17 @@
 
+using TinyMVVM.Repositories;
 using TinyMVVM.Framework.Services;
 using System;
 using System.Linq;
 using TinyMVVM.Framework;
 using System.Collections.ObjectModel;
 using RichRememberTheMilk.DataAccess;
+using RichRememberTheMilk.ViewModel.Repositories;
 
 namespace RichRememberTheMilk.ViewModel
 {
 	public partial class ApplicationContext : TinyMVVM.Framework.ViewModelBase
 	{
-		protected IUIInvoker UIInvoker { get; set; }
-
 		//State
 		public ObservableCollection<TaskList> TasksLists { get; set; } 
 		public TaskList SelectedList
@@ -37,18 +37,24 @@ namespace RichRememberTheMilk.ViewModel
 		
 		public ApplicationContext()
 		{
-		
-			ServiceLocator.SetLocatorIfNotSet(() => ServiceLocator.GetServiceLocator());
-			UIInvoker = ServiceLocator.Instance.GetInstance<IUIInvoker>();
-		
+			//ConfigureRepository();
+
+			TasksLists = new ObservableCollection<TaskList>();
+			SelectedList = new TaskList();
+	
+			
 			ApplyDefaultConventions();
+		}
+
+		private void ConfigureRepository()
+		{
+			ConfigureDependencies(config => 
+				config.Bind<IRepository<ApplicationContext>>().To<ApplicationContextRepository>());
 		}
 	}
 		
 	public partial class TaskList : TinyMVVM.Framework.ViewModelBase
 	{
-		protected IUIInvoker UIInvoker { get; set; }
-
 		//State
 		public String Name
 		{
@@ -74,18 +80,23 @@ namespace RichRememberTheMilk.ViewModel
 		
 		public TaskList()
 		{
-		
-			ServiceLocator.SetLocatorIfNotSet(() => ServiceLocator.GetServiceLocator());
-			UIInvoker = ServiceLocator.Instance.GetInstance<IUIInvoker>();
-		
+			//ConfigureRepository();
+
+				Tasks = new ObservableCollection<Task>();
+	
+			
 			ApplyDefaultConventions();
+		}
+
+		private void ConfigureRepository()
+		{
+			ConfigureDependencies(config => 
+				config.Bind<IRepository<TaskList>>().To<TaskListRepository>());
 		}
 	}
 		
 	public partial class Task : TinyMVVM.Framework.ViewModelBase
 	{
-		protected IUIInvoker UIInvoker { get; set; }
-
 		//State
 		public String Description
 		{
@@ -161,11 +172,18 @@ namespace RichRememberTheMilk.ViewModel
 		
 		public Task()
 		{
-		
-			ServiceLocator.SetLocatorIfNotSet(() => ServiceLocator.GetServiceLocator());
-			UIInvoker = ServiceLocator.Instance.GetInstance<IUIInvoker>();
-		
+			//ConfigureRepository();
+
+				Due = new DateTime();
+			
+			
 			ApplyDefaultConventions();
+		}
+
+		private void ConfigureRepository()
+		{
+			ConfigureDependencies(config => 
+				config.Bind<IRepository<Task>>().To<TaskRepository>());
 		}
 	}
 		

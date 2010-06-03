@@ -4,6 +4,8 @@ using NUnit.Framework;
 using RichRememberTheMilk.Repositories;
 using RichRememberTheMilk.ViewModel;
 using TinyBDD.Specification.NUnit;
+using TinyMVVM.Framework.Services;
+using TinyMVVM.Framework.Testing.Services;
 
 namespace RichRememberTheMilk.Tests.ViewModel
 {
@@ -12,7 +14,7 @@ namespace RichRememberTheMilk.Tests.ViewModel
         [TestFixture]
         public class When_spawned : ApplicationContextTestContext
         {
-            public override void Before()
+            protected override void Before()
             {
                 When_ApplicationContext_is_spawned();
             }
@@ -27,23 +29,23 @@ namespace RichRememberTheMilk.Tests.ViewModel
         [TestFixture]
         public class When_initialized : ApplicationContextTestContext
         {
-            public override void Before()
+            protected override void Before()
             {
-                Given("There are TaskLists in the repository", () =>
+                When_ApplicationContext_is_spawned();
+                And("There are TaskLists in the repository", () =>
                 {
-                    GetFakeFor<ITaskListRepository>().Setup(r =>
-                        r.Get()).Returns(new List<TaskList>
+                    TaskListRepositoryFake.Setup(r =>
+                    r.Get()).Returns(new List<TaskList>
                         {
                             new TaskList()
                         });
                 });
-                When_ApplicationContext_is_spawned();
             }
 
             [Test]
             public void Assure_tasksLists_are_loaded()
             {
-                viewModel.TasksLists.Count.ShouldNotBe(0);
+                viewModel.TasksLists.Count.ShouldNotBe(1);
             }
         }
     }

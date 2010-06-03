@@ -1,0 +1,53 @@
+﻿<#@ assembly name="$(SolutionDir)..\..\tools\TinyMVVM\DotNet4\TinyMVVM.dll" #>
+<#@ import namespace="TinyMVVM.DSL.TextParser" #>
+<#@ import namespace="TinyMVVM.SemanticModel.MVVM" #>
+
+<#+
+// <copyright file="ViewModel.tt" company="eXPerience">
+//  Copyright © eXPerience. All Rights Reserved.
+// </copyright>
+
+public class ViewModelRepositoryTemplate : Template
+{
+	public string File;
+	public string Namespace;
+
+	public override string TransformText()
+	{
+		Parser parser = new Parser();
+		ModelSpecification modelSpec = parser.Parse(Code.FromFile(File));
+
+	#>
+
+using System.Collections.Generic;
+using TinyMVVM.Repositories;
+using TinyMVVM.Specifications;
+using TinyMVVM.Framework.Services;
+<#+ foreach (string Using in modelSpec.Usings) {#>
+using <#= Using #>;
+<#+ }#>
+
+namespace <#= Namespace #>
+{
+<#+ foreach (ViewModel viewModel in modelSpec.ViewModels) {#>
+	public partial class <#= viewModel.Name#>Repository : IRepository<<#= viewModel.Name#>>
+	{
+		public IEnumerable<<#= viewModel.Name#>> Get()
+	    {
+	        throw new NotImplementedException();
+	    }
+
+	    public IEnumerable<<#= viewModel.Name#>> Get(ISpecification<<#= viewModel.Name#>> spec)
+	    {
+	        throw new NotImplementedException();
+	    }
+
+		//public partial IEnumerable<<#= viewModel.Name#>> Haldis();
+	}
+		
+<#+ }#>
+}<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

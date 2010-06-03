@@ -13,7 +13,7 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
         [TestFixture]
         public class When_spawned : TaskListTestContext
         {
-            public override void Before()
+            protected override void Before()
             {
                 When_TaskList_is_spawned();
             }

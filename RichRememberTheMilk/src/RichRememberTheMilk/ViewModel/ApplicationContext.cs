@@ -12,17 +12,5 @@ namespace RichRememberTheMilk.ViewModel
             ConfigureDependencies(config => config.Bind<ITaskListRepository>().To<TaskListRepository>());
             RegisterController<ApplicationContextController>();
         }
-
-        private void LoadAllTaskLists()
-        {
-            foreach (var taskList in GetAllTaskLists()) 
-                TasksLists.Add(taskList);
-        }
-
-        private IEnumerable<TaskList> GetAllTaskLists()
-        {
-            return GetInstance<ITaskListRepository>().Get();
-
-        }
     }
 }

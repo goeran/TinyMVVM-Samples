@@ -17,7 +17,7 @@ namespace RichRememberTheMilk.Controllers
             this.taskListRepository = taskListRepository;
             this.viewModel = viewModel;
 
-            //LoadAllTaskLists();
+            LoadAllTaskLists();
         }
 
         private void LoadAllTaskLists()

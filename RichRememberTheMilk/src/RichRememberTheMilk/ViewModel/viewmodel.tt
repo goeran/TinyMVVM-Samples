@@ -2,7 +2,7 @@
 <#@ output extension="txt" #>
 <#@ include file="T4Toolbox.tt" #>
 <#@ include file="$(SolutionDir)..\..\tools\TinyMVVM\DotNet4\CodeGen\ViewModelTemplate.tt" #>
-
+<#@ include file="$(SolutionDir)..\..\tools\TinyMVVM\DotNet4\CodeGen\ViewModelRepositoryTemplate.tt" #>
 <#
 	string dslFile = Host.ResolvePath("ViewModel.mvvm");
 	
@@ -11,4 +11,10 @@
 	viewModelTemplate.Output.File = "ViewModels.cs";
 	viewModelTemplate.Namespace = "RichRememberTheMilk.ViewModel";
 	viewModelTemplate.Render();
-#>
+
+	ViewModelRepositoryTemplate viewModelRepositoryTemplate = new ViewModelRepositoryTemplate();
+	viewModelRepositoryTemplate.File = dslFile;
+	viewModelRepositoryTemplate.Output.File = "ViewModelRepositories.cs";
+	viewModelRepositoryTemplate.Namespace = "RichRememberTheMilk.ViewModel.Repositories";
+	viewModelRepositoryTemplate.Render();
+#>	

@@ -19,18 +19,18 @@ public class ViewModelTemplate : Template
 
 	#>
 
+using TinyMVVM.Repositories;
 using TinyMVVM.Framework.Services;
 <#+ foreach (string Using in modelSpec.Usings) {#>
 using <#= Using #>;
 <#+ }#>
+using <#= Namespace#>.Repositories;
 
 namespace <#= Namespace #>
 {
 <#+ foreach (ViewModel viewModel in modelSpec.ViewModels) {#>
 	public partial class <#= viewModel.Name#> : <#= viewModel.Parent#>
 	{
-		protected IUIInvoker UIInvoker { get; set; }
-
 		//State
 	<#+ foreach (ViewModelProperty property in viewModel.Properties) {#>
 <#+ foreach (string attribute in property.Attributes) {#>
@@ -68,14 +68,25 @@ public <#= property.Type#> <#= property.Name#> { get; set; }
 	
 		public <#= viewModel.Name#>()
 		{
+			//ConfigureRepository();
+
+	<#+ foreach (ViewModelProperty property in viewModel.Properties) {#>
+	<#+ if (!property.IsPrimitiveType) {#>
+	<#= property.Name#> = new <#= property.Type#>();
+	<#+ }#>
+<#+ }#>
+
 	<#+ foreach (ViewModelCommand command in viewModel.Commands) {#>
 		<#= command.Name#> = new DelegateCommand();
 	<#+ }#>
-	
-			ServiceLocator.SetLocatorIfNotSet(() => ServiceLocator.GetServiceLocator());
-			UIInvoker = ServiceLocator.Instance.GetInstance<IUIInvoker>();
 		
 			ApplyDefaultConventions();
+		}
+
+		private void ConfigureRepository()
+		{
+			ConfigureDependencies(config => 
+				config.Bind<IRepository<<#= viewModel.Name#>>>().To<<#= viewModel.Name#>Repository>());
 		}
 	}
 		

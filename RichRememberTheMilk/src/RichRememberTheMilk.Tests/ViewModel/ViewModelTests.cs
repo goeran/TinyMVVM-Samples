@@ -1,8 +1,12 @@
 
 using System;
 using NUnit.Framework;
+using Moq;
 using RichRememberTheMilk.ViewModel;
+using TinyMVVM.Repositories;
 using TinyMVVM.Framework.Testing;
+using TinyMVVM.Framework.Testing.Services;
+using TinyMVVM.Framework.Services;
 using System;
 using System.Linq;
 using TinyMVVM.Framework;
@@ -15,41 +19,51 @@ namespace RichRememberTheMilk.Tests.ViewModel
 	{
 		protected ApplicationContext viewModel;
 
+		protected Mock<IRepository<ApplicationContext>> ApplicationContextRepositoryFake;
+		protected Mock<IRepository<TaskList>> TaskListRepositoryFake;
+		protected Mock<IRepository<Task>> TaskRepositoryFake;
+	
 		[SetUp]
-		public void SetupScenario()
+		public void Setup()
 		{
-			ServiceLocator.SetLocator(ServiceLocatorForTesting.GetServiceLocator());
-			
-			Setup();
+			ApplicationContext.RemoveAllGlobalDependencies();
+			ApplicationContext.ConfigureGlobalDependencies(config =>
+			{
+				config.Bind<IUIInvoker>().To<UIInvokerForTesting>();
+
+				ApplicationContextRepositoryFake = new Mock<IRepository<ApplicationContext>>();
+				config.Bind<IRepository<ApplicationContext>>().ToInstance(ApplicationContextRepositoryFake.Object);
+				TaskListRepositoryFake = new Mock<IRepository<TaskList>>();
+				config.Bind<IRepository<TaskList>>().ToInstance(TaskListRepositoryFake.Object);
+				TaskRepositoryFake = new Mock<IRepository<Task>>();
+				config.Bind<IRepository<Task>>().ToInstance(TaskRepositoryFake.Object);
+		
+			});
+
 			Before();
 		}
 
-		[TearDown]
-		public void TearDownScenario()
-		{
-			TearDown();
-			After();
-		}
-
-		public virtual void Setup()
+		private void ConfigureRepositories()
 		{
 		}
 
-		public virtual void Before()
+		/*protected void Given_Repositories_are_configured()
+		{
+			ConfigureRepositories();
+		}
+
+		protected void And_Repositories_are_configured()
+		{
+			ConfigureRepositories();
+		}*/
+
+		protected virtual void Before()
 		{
 		}
 
-		public virtual void After()
+		public void Given_dependencies_are_configured(Action<DependencyConfigSemantics> configAction)
 		{
-		}
-
-		public virtual void TearDown()
-		{
-		}
-
-		public void Given(string description, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
+			ApplicationContext.ConfigureGlobalDependencies(configAction);
 		}
 
 		public void Given_ApplicationContext_is_created()
@@ -57,11 +71,16 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			viewModel = new ApplicationContext();
 		}
 
+		public void Given(string text, Action unitOfWork)
+		{
+			unitOfWork.Invoke();
+		}
+
 		public void And_ApplicationContext_is_created()
 		{
 			viewModel = new ApplicationContext();
 		}
-		
+
 		public void And_TasksLists_is_set(ObservableCollection<TaskList> value)
 		{
 			viewModel.TasksLists = value;
@@ -71,6 +90,12 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		{
 			unitOfWork.Invoke();
 		}
+	
+		public void And_SelectedList_is_set(TaskList value)
+		{
+			viewModel.SelectedList = value;
+		}
+
 	
 		
 	
@@ -82,6 +107,11 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		public void When_TasksLists_is_set(ObservableCollection<TaskList> value)
 		{
 			viewModel.TasksLists = value;
+		}
+		
+		public void When_SelectedList_is_set(TaskList value)
+		{
+			viewModel.SelectedList = value;
 		}
 		
 		
@@ -100,56 +130,57 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		{
 			unitOfWork.Invoke();
 		}
-
-		public void When(string description)
-		{
-		}
-
-		public void When_ApplicationContext_is_initialized()
-		{
-			viewModel = new ApplicationContext();
-		}
 }
 
 	public abstract class TaskListTestContext : TestContext
 	{
 		protected TaskList viewModel;
 
+		protected Mock<IRepository<ApplicationContext>> ApplicationContextRepositoryFake;
+		protected Mock<IRepository<TaskList>> TaskListRepositoryFake;
+		protected Mock<IRepository<Task>> TaskRepositoryFake;
+	
 		[SetUp]
-		public void SetupScenario()
+		public void Setup()
 		{
-			ServiceLocator.SetLocator(ServiceLocatorForTesting.GetServiceLocator());
-			
-			Setup();
+			TaskList.RemoveAllGlobalDependencies();
+			TaskList.ConfigureGlobalDependencies(config =>
+			{
+				config.Bind<IUIInvoker>().To<UIInvokerForTesting>();
+
+				ApplicationContextRepositoryFake = new Mock<IRepository<ApplicationContext>>();
+				config.Bind<IRepository<ApplicationContext>>().ToInstance(ApplicationContextRepositoryFake.Object);
+				TaskListRepositoryFake = new Mock<IRepository<TaskList>>();
+				config.Bind<IRepository<TaskList>>().ToInstance(TaskListRepositoryFake.Object);
+				TaskRepositoryFake = new Mock<IRepository<Task>>();
+				config.Bind<IRepository<Task>>().ToInstance(TaskRepositoryFake.Object);
+		
+			});
+
 			Before();
 		}
 
-		[TearDown]
-		public void TearDownScenario()
-		{
-			TearDown();
-			After();
-		}
-
-		public virtual void Setup()
+		private void ConfigureRepositories()
 		{
 		}
 
-		public virtual void Before()
+		/*protected void Given_Repositories_are_configured()
+		{
+			ConfigureRepositories();
+		}
+
+		protected void And_Repositories_are_configured()
+		{
+			ConfigureRepositories();
+		}*/
+
+		protected virtual void Before()
 		{
 		}
 
-		public virtual void After()
+		public void Given_dependencies_are_configured(Action<DependencyConfigSemantics> configAction)
 		{
-		}
-
-		public virtual void TearDown()
-		{
-		}
-
-		public void Given(string description, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
+			TaskList.ConfigureGlobalDependencies(configAction);
 		}
 
 		public void Given_TaskList_is_created()
@@ -157,11 +188,16 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			viewModel = new TaskList();
 		}
 
+		public void Given(string text, Action unitOfWork)
+		{
+			unitOfWork.Invoke();
+		}
+
 		public void And_TaskList_is_created()
 		{
 			viewModel = new TaskList();
 		}
-		
+
 		public void And_Name_is_set(String value)
 		{
 			viewModel.Name = value;
@@ -211,56 +247,57 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		{
 			unitOfWork.Invoke();
 		}
-
-		public void When(string description)
-		{
-		}
-
-		public void When_TaskList_is_initialized()
-		{
-			viewModel = new TaskList();
-		}
 }
 
 	public abstract class TaskTestContext : TestContext
 	{
 		protected Task viewModel;
 
+		protected Mock<IRepository<ApplicationContext>> ApplicationContextRepositoryFake;
+		protected Mock<IRepository<TaskList>> TaskListRepositoryFake;
+		protected Mock<IRepository<Task>> TaskRepositoryFake;
+	
 		[SetUp]
-		public void SetupScenario()
+		public void Setup()
 		{
-			ServiceLocator.SetLocator(ServiceLocatorForTesting.GetServiceLocator());
-			
-			Setup();
+			Task.RemoveAllGlobalDependencies();
+			Task.ConfigureGlobalDependencies(config =>
+			{
+				config.Bind<IUIInvoker>().To<UIInvokerForTesting>();
+
+				ApplicationContextRepositoryFake = new Mock<IRepository<ApplicationContext>>();
+				config.Bind<IRepository<ApplicationContext>>().ToInstance(ApplicationContextRepositoryFake.Object);
+				TaskListRepositoryFake = new Mock<IRepository<TaskList>>();
+				config.Bind<IRepository<TaskList>>().ToInstance(TaskListRepositoryFake.Object);
+				TaskRepositoryFake = new Mock<IRepository<Task>>();
+				config.Bind<IRepository<Task>>().ToInstance(TaskRepositoryFake.Object);
+		
+			});
+
 			Before();
 		}
 
-		[TearDown]
-		public void TearDownScenario()
-		{
-			TearDown();
-			After();
-		}
-
-		public virtual void Setup()
+		private void ConfigureRepositories()
 		{
 		}
 
-		public virtual void Before()
+		/*protected void Given_Repositories_are_configured()
+		{
+			ConfigureRepositories();
+		}
+
+		protected void And_Repositories_are_configured()
+		{
+			ConfigureRepositories();
+		}*/
+
+		protected virtual void Before()
 		{
 		}
 
-		public virtual void After()
+		public void Given_dependencies_are_configured(Action<DependencyConfigSemantics> configAction)
 		{
-		}
-
-		public virtual void TearDown()
-		{
-		}
-
-		public void Given(string description, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
+			Task.ConfigureGlobalDependencies(configAction);
 		}
 
 		public void Given_Task_is_created()
@@ -268,11 +305,16 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			viewModel = new Task();
 		}
 
+		public void Given(string text, Action unitOfWork)
+		{
+			unitOfWork.Invoke();
+		}
+
 		public void And_Task_is_created()
 		{
 			viewModel = new Task();
 		}
-		
+
 		public void And_Description_is_set(String value)
 		{
 			viewModel.Description = value;
@@ -339,15 +381,6 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		public void When(string description, Action unitOfWork)
 		{
 			unitOfWork.Invoke();
-		}
-
-		public void When(string description)
-		{
-		}
-
-		public void When_Task_is_initialized()
-		{
-			viewModel = new Task();
 		}
 }
 
