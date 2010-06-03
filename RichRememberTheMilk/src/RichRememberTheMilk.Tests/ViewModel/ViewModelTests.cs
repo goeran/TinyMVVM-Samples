@@ -95,7 +95,7 @@ namespace RichRememberTheMilk.Tests.ViewModel
 
 	
 		
-	
+
 		public void And_ApplicationContext_PropertyChangeRecording_is_Started()
 		{
 			viewModel.PropertyChangeRecorder.Start();
@@ -208,8 +208,14 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			unitOfWork.Invoke();
 		}
 	
-		
+		public void And_NewTaskDescription_is_set(string value)
+		{
+			viewModel.NewTaskDescription = value;
+		}
+
 	
+		
+
 		public void And_TaskList_PropertyChangeRecording_is_Started()
 		{
 			viewModel.PropertyChangeRecorder.Start();
@@ -225,12 +231,53 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			viewModel.Tasks = value;
 		}
 		
+		public void When_NewTaskDescription_is_set(string value)
+		{
+			viewModel.NewTaskDescription = value;
+		}
+		
 		
 		public void When_TaskList_is_spawned()
 		{
 			viewModel = new TaskList();
 		} 
 		
+		public void And_Add_Command_is_executed()
+		{
+			viewModel.Add.Execute(null);
+		}
+
+		public void When_execute_Add_Command()
+		{
+			viewModel.Add.Execute(null);
+		}
+		public void And_Complete_Command_is_executed()
+		{
+			viewModel.Complete.Execute(null);
+		}
+
+		public void When_execute_Complete_Command()
+		{
+			viewModel.Complete.Execute(null);
+		}
+		public void And_Postpone_Command_is_executed()
+		{
+			viewModel.Postpone.Execute(null);
+		}
+
+		public void When_execute_Postpone_Command()
+		{
+			viewModel.Postpone.Execute(null);
+		}
+		public void And_Delete_Command_is_executed()
+		{
+			viewModel.Delete.Execute(null);
+		}
+
+		public void When_execute_Delete_Command()
+		{
+			viewModel.Delete.Execute(null);
+		}
 			
 		public void And(string description, Action unitOfWork)
 		{
@@ -331,7 +378,7 @@ namespace RichRememberTheMilk.Tests.ViewModel
 
 	
 		
-	
+
 		public void And_Task_PropertyChangeRecording_is_Started()
 		{
 			viewModel.PropertyChangeRecorder.Start();

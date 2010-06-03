@@ -74,16 +74,41 @@ namespace RichRememberTheMilk.ViewModel
 		private String _Name;
 
 		public ObservableCollection<Task> Tasks { get; set; } 
+		public string NewTaskDescription
+		{
+			get { return _NewTaskDescription; }
+			set
+			{
+				if (value != _NewTaskDescription)
+				{
+					UIInvoker.Invoke(() =>
+					{
+						_NewTaskDescription = value;
+						TriggerPropertyChanged("NewTaskDescription");
+					});
+				}
+			}
+		}
+		private string _NewTaskDescription;
+
 	
 		
 		//Commands
+		public DelegateCommand Add { get; set; }
+		public DelegateCommand Complete { get; set; }
+		public DelegateCommand Postpone { get; set; }
+		public DelegateCommand Delete { get; set; }
 		
 		public TaskList()
 		{
 			//ConfigureRepository();
 
 				Tasks = new ObservableCollection<Task>();
-	
+		
+			Add = new DelegateCommand();
+			Complete = new DelegateCommand();
+			Postpone = new DelegateCommand();
+			Delete = new DelegateCommand();
 			
 			ApplyDefaultConventions();
 		}
