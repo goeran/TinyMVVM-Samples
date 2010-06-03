@@ -56,7 +56,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomServiceLocatorForTesting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ApplicationContextSpecs.cs" />
     <Compile Include="ViewModel\TaskListSpecs.cs" />

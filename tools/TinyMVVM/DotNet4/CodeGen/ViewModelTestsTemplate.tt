@@ -39,7 +39,7 @@ namespace <#= Namespace #>
 		protected <#= viewModel.Name#> viewModel;
 
 	<#+ foreach (ViewModel vm in modelSpec.ViewModels) {#>
-	protected Mock<IRepository<<#= vm.Name#>>> <#= vm.Name#>RepositoryFake;
+	protected Mock<IRepository<<#= vm.Name#>>> <#= vm.Name#>RepositoryFake = new Mock<IRepository<<#= vm.Name#>>>();
 	<#+ }#>
 
 		[SetUp]
@@ -51,8 +51,7 @@ namespace <#= Namespace #>
 				config.Bind<IUIInvoker>().To<UIInvokerForTesting>();
 
 		<#+ foreach (ViewModel vm in modelSpec.ViewModels) {#>
-		<#= vm.Name#>RepositoryFake = new Mock<IRepository<<#= vm.Name#>>>();
-				config.Bind<IRepository<<#= vm.Name#>>>().ToInstance(<#= vm.Name#>RepositoryFake.Object);
+		config.Bind<IRepository<<#= vm.Name#>>>().ToInstance(<#= vm.Name#>RepositoryFake.Object);
 		<#+ }#>
 
 			});

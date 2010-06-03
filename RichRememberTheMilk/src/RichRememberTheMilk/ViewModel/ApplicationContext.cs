@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using RichRememberTheMilk.Controllers;
 using RichRememberTheMilk.Desktop.Repositories;
-using RichRememberTheMilk.Repositories;
+using TinyMVVM.Repositories;
 
 namespace RichRememberTheMilk.ViewModel
 {
@@ -9,7 +9,6 @@ namespace RichRememberTheMilk.ViewModel
     {
         public void OnInitialize()
         {
-            ConfigureDependencies(config => config.Bind<ITaskListRepository>().To<TaskListRepository>());
             RegisterController<ApplicationContextController>();
         }
     }

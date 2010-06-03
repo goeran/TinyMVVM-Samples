@@ -19,9 +19,9 @@ namespace RichRememberTheMilk.Tests.ViewModel
 	{
 		protected ApplicationContext viewModel;
 
-		protected Mock<IRepository<ApplicationContext>> ApplicationContextRepositoryFake;
-		protected Mock<IRepository<TaskList>> TaskListRepositoryFake;
-		protected Mock<IRepository<Task>> TaskRepositoryFake;
+		protected Mock<IRepository<ApplicationContext>> ApplicationContextRepositoryFake = new Mock<IRepository<ApplicationContext>>();
+		protected Mock<IRepository<TaskList>> TaskListRepositoryFake = new Mock<IRepository<TaskList>>();
+		protected Mock<IRepository<Task>> TaskRepositoryFake = new Mock<IRepository<Task>>();
 	
 		[SetUp]
 		public void Setup()
@@ -31,11 +31,8 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			{
 				config.Bind<IUIInvoker>().To<UIInvokerForTesting>();
 
-				ApplicationContextRepositoryFake = new Mock<IRepository<ApplicationContext>>();
 				config.Bind<IRepository<ApplicationContext>>().ToInstance(ApplicationContextRepositoryFake.Object);
-				TaskListRepositoryFake = new Mock<IRepository<TaskList>>();
 				config.Bind<IRepository<TaskList>>().ToInstance(TaskListRepositoryFake.Object);
-				TaskRepositoryFake = new Mock<IRepository<Task>>();
 				config.Bind<IRepository<Task>>().ToInstance(TaskRepositoryFake.Object);
 		
 			});
@@ -136,9 +133,9 @@ namespace RichRememberTheMilk.Tests.ViewModel
 	{
 		protected TaskList viewModel;
 
-		protected Mock<IRepository<ApplicationContext>> ApplicationContextRepositoryFake;
-		protected Mock<IRepository<TaskList>> TaskListRepositoryFake;
-		protected Mock<IRepository<Task>> TaskRepositoryFake;
+		protected Mock<IRepository<ApplicationContext>> ApplicationContextRepositoryFake = new Mock<IRepository<ApplicationContext>>();
+		protected Mock<IRepository<TaskList>> TaskListRepositoryFake = new Mock<IRepository<TaskList>>();
+		protected Mock<IRepository<Task>> TaskRepositoryFake = new Mock<IRepository<Task>>();
 	
 		[SetUp]
 		public void Setup()
@@ -148,11 +145,8 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			{
 				config.Bind<IUIInvoker>().To<UIInvokerForTesting>();
 
-				ApplicationContextRepositoryFake = new Mock<IRepository<ApplicationContext>>();
 				config.Bind<IRepository<ApplicationContext>>().ToInstance(ApplicationContextRepositoryFake.Object);
-				TaskListRepositoryFake = new Mock<IRepository<TaskList>>();
 				config.Bind<IRepository<TaskList>>().ToInstance(TaskListRepositoryFake.Object);
-				TaskRepositoryFake = new Mock<IRepository<Task>>();
 				config.Bind<IRepository<Task>>().ToInstance(TaskRepositoryFake.Object);
 		
 			});
@@ -253,9 +247,9 @@ namespace RichRememberTheMilk.Tests.ViewModel
 	{
 		protected Task viewModel;
 
-		protected Mock<IRepository<ApplicationContext>> ApplicationContextRepositoryFake;
-		protected Mock<IRepository<TaskList>> TaskListRepositoryFake;
-		protected Mock<IRepository<Task>> TaskRepositoryFake;
+		protected Mock<IRepository<ApplicationContext>> ApplicationContextRepositoryFake = new Mock<IRepository<ApplicationContext>>();
+		protected Mock<IRepository<TaskList>> TaskListRepositoryFake = new Mock<IRepository<TaskList>>();
+		protected Mock<IRepository<Task>> TaskRepositoryFake = new Mock<IRepository<Task>>();
 	
 		[SetUp]
 		public void Setup()
@@ -265,11 +259,8 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			{
 				config.Bind<IUIInvoker>().To<UIInvokerForTesting>();
 
-				ApplicationContextRepositoryFake = new Mock<IRepository<ApplicationContext>>();
 				config.Bind<IRepository<ApplicationContext>>().ToInstance(ApplicationContextRepositoryFake.Object);
-				TaskListRepositoryFake = new Mock<IRepository<TaskList>>();
 				config.Bind<IRepository<TaskList>>().ToInstance(TaskListRepositoryFake.Object);
-				TaskRepositoryFake = new Mock<IRepository<Task>>();
 				config.Bind<IRepository<Task>>().ToInstance(TaskRepositoryFake.Object);
 		
 			});

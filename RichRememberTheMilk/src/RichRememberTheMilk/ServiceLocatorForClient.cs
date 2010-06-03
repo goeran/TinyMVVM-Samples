@@ -4,7 +4,6 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using RichRememberTheMilk.Desktop.Repositories;
-using RichRememberTheMilk.Repositories;
 using RichRememberTheMilk.ViewModel;
 using TinyMVVM.Framework;
 using TinyMVVM.Framework.Services.Impl;

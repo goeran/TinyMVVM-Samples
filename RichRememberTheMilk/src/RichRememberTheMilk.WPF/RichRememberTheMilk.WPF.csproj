@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Views\ApplicationContextView.xaml.cs">
       <DependentUpon>ApplicationContextView.xaml</DependentUpon>
     </Compile>

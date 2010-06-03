@@ -52,7 +52,6 @@
     <Compile Include="Controllers\ApplicationContextController.cs" />
     <Compile Include="DataAccess\Customer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ITaskListRepository.cs" />
     <Compile Include="Repositories\TaskListRepository.cs" />
     <Compile Include="ServiceLocatorForClient.cs" />
     <Compile Include="ViewModel\ApplicationContext.cs" />
