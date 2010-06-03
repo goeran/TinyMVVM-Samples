@@ -74,6 +74,7 @@ namespace RichRememberTheMilk.ViewModel
 		private String _Name;
 
 		public ObservableCollection<Task> Tasks { get; set; } 
+		public ObservableCollection<Task> SelectedTasks { get; set; } 
 		public string NewTaskDescription
 		{
 			get { return _NewTaskDescription; }
@@ -104,6 +105,7 @@ namespace RichRememberTheMilk.ViewModel
 			//ConfigureRepository();
 
 				Tasks = new ObservableCollection<Task>();
+			SelectedTasks = new ObservableCollection<Task>();
 		
 			Add = new DelegateCommand();
 			Complete = new DelegateCommand();

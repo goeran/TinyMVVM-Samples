@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using RichRememberTheMilk.ViewModel;
 using TinyBDD.Specification.NUnit;
 using RichRememberTheMilk.Tests.ViewModel;
 
@@ -51,10 +52,27 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
         }
 
         [TestFixture]
+        public class When_NewTaskDesription_is_empty : TaskListTestContext
+        {
+            protected override void Before()
+            {
+                Given_TaskList_is_created();
+
+                When_NewTaskDescription_is_set(string.Empty);
+            }   
+
+            [Test]
+            public void assure_Add_command_cant_be_executed()
+            {
+                viewModel.Add.CanExecute(null).ShouldBeFalse();
+            }
+
+        }
+
+        [TestFixture]
         public class When_Add : TaskListTestContext
         {
-            [SetUp]
-            public void Setup()
+            protected override void Before()
             {
                 Given_TaskList_is_created();
                 And("Task name is added", () =>
@@ -77,7 +95,37 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
             {
                 viewModel.NewTaskDescription.ShouldBeNull();
             }
+        }
 
+        [TestFixture]
+        public class When_Select_Task : TaskListTestContext
+        {
+            protected override void Before()
+            {
+                Given_TaskList_is_created();
+                And("it contains Tasks", () =>
+                {
+                    viewModel.Tasks.Add(new Task());
+                    viewModel.Tasks.Add(new Task());
+                });
+
+                When("first Task is selected", () =>
+                    viewModel.Tasks.First().IsSelected = true);
+            }
+
+            [Test]
+            public void Then_assure_its_added_to_SelectedTasks()
+            {
+                viewModel.SelectedTasks.ShouldHave(1);
+            }
+        }
+
+        [TestFixture]
+        public class When_UnSelect_Task : TaskListTestContext
+        {
+            protected override void Before()
+            {
+            }
         }
 
     }

@@ -11,6 +11,7 @@ viewmodel ApplicationContext:
 viewmodel TaskList:
 	oproperty Name as String
 	property Tasks as ObservableCollection<Task>
+	property SelectedTasks as ObservableCollection<Task>
 	oproperty NewTaskDescription as string
 
 	command Add
