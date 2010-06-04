@@ -33,8 +33,16 @@ using <#= Using #>;
 
 namespace <#= Namespace #>
 {
+	public abstract class ScenarioClass<T> where T: class
+	{
+        protected T Given { get { return this as T; } }
+        protected T And { get { return this as T; } }
+        protected T When { get { return this as T; } }
+        protected T Then { get { return this as T; } }
+	}
+
 <#+ foreach (ViewModel viewModel in modelSpec.ViewModels){#>
-	public abstract class <#= viewModel.Name #>TestContext : TestContext
+	public abstract class <#= viewModel.Name #>TestContext<T> : ScenarioClass<T> where T: class
 	{
 		protected <#= viewModel.Name#> viewModel;
 
@@ -59,46 +67,36 @@ namespace <#= Namespace #>
 			Before();
 		}
 
-		private void ConfigureRepositories()
-		{
-		}
-
-		/*protected void Given_Repositories_are_configured()
-		{
-			ConfigureRepositories();
-		}
-
-		protected void And_Repositories_are_configured()
-		{
-			ConfigureRepositories();
-		}*/
-
 		protected virtual void Before()
 		{
 		}
 
-		public void Given_dependencies_are_configured(Action<DependencyConfigSemantics> configAction)
+		[TearDown]
+		public void TearDown()
+		{
+			After();
+			<#= viewModel.Name#>.RemoveAllGlobalDependencies();
+		}
+
+		protected virtual void After()
+		{
+		}
+
+		//Given
+		public void dependencies_are_configured(Action<DependencyConfigSemantics> configAction)
 		{
 			<#= viewModel.Name#>.ConfigureGlobalDependencies(configAction);
 		}
 
-		public void Given_<#= viewModel.Name#>_is_created()
+		//Given & And
+		public void <#= viewModel.Name#>_is_created()
 		{
 			viewModel = new <#= viewModel.Name#>();
 		}
 
-		public void Given(string text, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
-
-		public void And_<#= viewModel.Name#>_is_created()
-		{
-			viewModel = new <#= viewModel.Name#>();
-		}
-
+		//And
 	<#+ foreach (ViewModelProperty property in viewModel.Properties){#>
-	public void And_<#= property.Name#>_is_set(<#= property.Type#> value)
+	public void <#= property.Name#>_is_set(<#= property.Type#> value)
 		{
 			viewModel.<#= property.Name#> = value;
 		}
@@ -106,7 +104,8 @@ namespace <#= Namespace #>
 	<#+ if (property.Type.Contains("Collection")) { 
 		String possibleTypeName = property.Name.Substring(0, property.Name.Length - 1); 
 	#>
-	public void When_add_<#= possibleTypeName#>(Action unitOfWork)
+	//When
+	public void add_<#= possibleTypeName#>(Action unitOfWork)
 		{
 			unitOfWork.Invoke();
 		}
@@ -114,45 +113,31 @@ namespace <#= Namespace #>
 
 	<#+ }#>	
 
-		public void And_<#= viewModel.Name#>_PropertyChangeRecording_is_Started()
+		//And
+		public void <#= viewModel.Name#>_PropertyChangeRecording_is_Started()
 		{
 			viewModel.PropertyChangeRecorder.Start();
 		}
 
-	<#+ foreach (ViewModelProperty property in viewModel.Properties){#>
-	public void When_<#= property.Name#>_is_set(<#= property.Type#> value)
-		{
-			viewModel.<#= property.Name#> = value;
-		}
-		
-	<#+ }#>
-	
-		public void When_<#= viewModel.Name#>_is_spawned()
+		//When
+		public void <#= viewModel.Name#>_is_spawned()
 		{
 			viewModel = new <#= viewModel.Name#>();
 		} 
 		
+		//And
 	<#+ foreach (ViewModelCommand command in viewModel.Commands) {#>
-	public void And_<#= command.Name#>_Command_is_executed()
+	public void <#= command.Name#>_Command_is_executed()
 		{
 			viewModel.<#= command.Name#>.Execute(null);
 		}
 
-		public void When_execute_<#= command.Name#>_Command()
+		//When
+		public void execute_<#= command.Name#>_Command()
 		{
 			viewModel.<#= command.Name#>.Execute(null);
 		}
 	<#+ }#>
-		
-		public void And(string description, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
-
-		public void When(string description, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
 }
 
 <#+ }#>

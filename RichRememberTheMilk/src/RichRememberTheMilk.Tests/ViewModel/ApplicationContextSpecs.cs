@@ -13,11 +13,11 @@ namespace RichRememberTheMilk.Tests.ViewModel
     public class ApplicationContextSpecs
     {
         [TestFixture]
-        public class When_spawned : ApplicationContextTestContext
+        public class When_spawned : ApplicationContextTestContext<When_spawned>
         {
             protected override void Before()
             {
-                When_ApplicationContext_is_spawned();
+                When.ApplicationContext_is_spawned();
             }
 
             [Test]
@@ -28,20 +28,22 @@ namespace RichRememberTheMilk.Tests.ViewModel
         }
 
         [TestFixture]
-        public class When_initialized : ApplicationContextTestContext
+        public class When_initialized : ApplicationContextTestContext<When_initialized>
         {
             protected override void Before()
             {
-                Given("There are TaskLists in the repository", () =>
-                {
-                    TaskListRepositoryFake.Setup(r =>
-                    r.Get()).Returns(new List<TaskList>
-                        {
-                            new TaskList()
-                        });
-                });
+                Given.there_are_TaskLists_in_the_repository();
 
-                When_ApplicationContext_is_spawned();
+                When.ApplicationContext_is_spawned();
+            }
+
+            private void there_are_TaskLists_in_the_repository()
+            {
+                TaskListRepositoryFake.Setup(r =>
+                    r.Get()).Returns(new List<TaskList>
+                    {
+                        new TaskList()
+                    });
             }
 
             [Test]

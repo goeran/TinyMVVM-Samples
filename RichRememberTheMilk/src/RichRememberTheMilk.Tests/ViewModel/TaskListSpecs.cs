@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,11 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
     public class TaskListSpecs
     {
         [TestFixture]
-        public class When_spawned : TaskListTestContext
+        public class When_spawned : TaskListTestContext<When_spawned>
         {
             protected override void Before()
             {
-                When_TaskList_is_spawned();
+                When.TaskList_is_spawned();
             }
 
             [Test]
@@ -52,13 +53,13 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
         }
 
         [TestFixture]
-        public class When_NewTaskDesription_is_empty : TaskListTestContext
+        public class When_NewTaskDesription_is_empty : TaskListTestContext<When_NewTaskDesription_is_empty>
         {
             protected override void Before()
             {
-                Given_TaskList_is_created();
+                Given.TaskList_is_created();
 
-                When_NewTaskDescription_is_set(string.Empty);
+                When.NewTaskDescription_is_set(string.Empty);
             }   
 
             [Test]
@@ -70,17 +71,14 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
         }
 
         [TestFixture]
-        public class When_Add : TaskListTestContext
+        public class When_Add : TaskListTestContext<When_Add>
         {
             protected override void Before()
             {
-                Given_TaskList_is_created();
-                And("Task name is added", () =>
-                {
-                    viewModel.NewTaskDescription = "hello world";
-                });
+                Given.TaskList_is_created();
+                And.NewTaskDescription_is_set("hello world");
 
-                When_execute_Add_Command();
+                When.execute_Add_Command();
             }
 
             [Test]
@@ -98,19 +96,25 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
         }
 
         [TestFixture]
-        public class When_Select_Task : TaskListTestContext
+        public class When_Select_Task : TaskListTestContext<When_Select_Task>
         {
             protected override void Before()
             {
-                Given_TaskList_is_created();
-                And("it contains Tasks", () =>
-                {
-                    viewModel.Tasks.Add(new Task());
-                    viewModel.Tasks.Add(new Task());
-                });
+                Given.TaskList_is_created();
+                And.it_contains_tasks();
 
-                When("first Task is selected", () =>
-                    viewModel.Tasks.First().IsSelected = true);
+                When.first_Task_is_selected();
+            }
+
+            private void it_contains_tasks()
+            {
+                viewModel.Tasks.Add(new Task());
+                viewModel.Tasks.Add(new Task());
+            }
+
+            private bool first_Task_is_selected()
+            {
+                return viewModel.Tasks.First().IsSelected = true;
             }
 
             [Test]
@@ -121,7 +125,7 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
         }
 
         [TestFixture]
-        public class When_UnSelect_Task : TaskListTestContext
+        public class When_UnSelect_Task : TaskListTestContext<When_UnSelect_Task>
         {
             protected override void Before()
             {

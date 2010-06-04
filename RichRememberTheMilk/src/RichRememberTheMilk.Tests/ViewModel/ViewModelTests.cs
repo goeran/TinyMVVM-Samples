@@ -15,7 +15,15 @@ using RichRememberTheMilk.DataAccess;
 
 namespace RichRememberTheMilk.Tests.ViewModel
 {
-	public abstract class ApplicationContextTestContext : TestContext
+	public abstract class ScenarioClass<T> where T: class
+	{
+        protected T Given { get { return this as T; } }
+        protected T And { get { return this as T; } }
+        protected T When { get { return this as T; } }
+        protected T Then { get { return this as T; } }
+	}
+
+	public abstract class ApplicationContextTestContext<T> : ScenarioClass<T> where T: class
 	{
 		protected ApplicationContext viewModel;
 
@@ -40,55 +48,46 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			Before();
 		}
 
-		private void ConfigureRepositories()
-		{
-		}
-
-		/*protected void Given_Repositories_are_configured()
-		{
-			ConfigureRepositories();
-		}
-
-		protected void And_Repositories_are_configured()
-		{
-			ConfigureRepositories();
-		}*/
-
 		protected virtual void Before()
 		{
 		}
 
-		public void Given_dependencies_are_configured(Action<DependencyConfigSemantics> configAction)
+		[TearDown]
+		public void TearDown()
+		{
+			After();
+			ApplicationContext.RemoveAllGlobalDependencies();
+		}
+
+		protected virtual void After()
+		{
+		}
+
+		//Given
+		public void dependencies_are_configured(Action<DependencyConfigSemantics> configAction)
 		{
 			ApplicationContext.ConfigureGlobalDependencies(configAction);
 		}
 
-		public void Given_ApplicationContext_is_created()
+		//Given & And
+		public void ApplicationContext_is_created()
 		{
 			viewModel = new ApplicationContext();
 		}
 
-		public void Given(string text, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
-
-		public void And_ApplicationContext_is_created()
-		{
-			viewModel = new ApplicationContext();
-		}
-
-		public void And_TasksLists_is_set(ObservableCollection<TaskList> value)
+		//And
+		public void TasksLists_is_set(ObservableCollection<TaskList> value)
 		{
 			viewModel.TasksLists = value;
 		}
 
-		public void When_add_TasksList(Action unitOfWork)
+		//When
+	public void add_TasksList(Action unitOfWork)
 		{
 			unitOfWork.Invoke();
 		}
 	
-		public void And_SelectedList_is_set(TaskList value)
+		public void SelectedList_is_set(TaskList value)
 		{
 			viewModel.SelectedList = value;
 		}
@@ -96,40 +95,22 @@ namespace RichRememberTheMilk.Tests.ViewModel
 	
 		
 
-		public void And_ApplicationContext_PropertyChangeRecording_is_Started()
+		//And
+		public void ApplicationContext_PropertyChangeRecording_is_Started()
 		{
 			viewModel.PropertyChangeRecorder.Start();
 		}
 
-		public void When_TasksLists_is_set(ObservableCollection<TaskList> value)
-		{
-			viewModel.TasksLists = value;
-		}
-		
-		public void When_SelectedList_is_set(TaskList value)
-		{
-			viewModel.SelectedList = value;
-		}
-		
-		
-		public void When_ApplicationContext_is_spawned()
+		//When
+		public void ApplicationContext_is_spawned()
 		{
 			viewModel = new ApplicationContext();
 		} 
 		
-			
-		public void And(string description, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
+		//And
+	}
 
-		public void When(string description, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
-}
-
-	public abstract class TaskListTestContext : TestContext
+	public abstract class TaskListTestContext<T> : ScenarioClass<T> where T: class
 	{
 		protected TaskList viewModel;
 
@@ -154,61 +135,63 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			Before();
 		}
 
-		private void ConfigureRepositories()
-		{
-		}
-
-		/*protected void Given_Repositories_are_configured()
-		{
-			ConfigureRepositories();
-		}
-
-		protected void And_Repositories_are_configured()
-		{
-			ConfigureRepositories();
-		}*/
-
 		protected virtual void Before()
 		{
 		}
 
-		public void Given_dependencies_are_configured(Action<DependencyConfigSemantics> configAction)
+		[TearDown]
+		public void TearDown()
+		{
+			After();
+			TaskList.RemoveAllGlobalDependencies();
+		}
+
+		protected virtual void After()
+		{
+		}
+
+		//Given
+		public void dependencies_are_configured(Action<DependencyConfigSemantics> configAction)
 		{
 			TaskList.ConfigureGlobalDependencies(configAction);
 		}
 
-		public void Given_TaskList_is_created()
+		//Given & And
+		public void TaskList_is_created()
 		{
 			viewModel = new TaskList();
 		}
 
-		public void Given(string text, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
-
-		public void And_TaskList_is_created()
-		{
-			viewModel = new TaskList();
-		}
-
-		public void And_Name_is_set(String value)
+		//And
+		public void Name_is_set(String value)
 		{
 			viewModel.Name = value;
 		}
 
 	
-		public void And_Tasks_is_set(ObservableCollection<Task> value)
+		public void Tasks_is_set(ObservableCollection<Task> value)
 		{
 			viewModel.Tasks = value;
 		}
 
-		public void When_add_Task(Action unitOfWork)
+		//When
+	public void add_Task(Action unitOfWork)
 		{
 			unitOfWork.Invoke();
 		}
 	
-		public void And_NewTaskDescription_is_set(string value)
+		public void SelectedTasks_is_set(ObservableCollection<Task> value)
+		{
+			viewModel.SelectedTasks = value;
+		}
+
+		//When
+	public void add_SelectedTask(Action unitOfWork)
+		{
+			unitOfWork.Invoke();
+		}
+	
+		public void NewTaskDescription_is_set(string value)
 		{
 			viewModel.NewTaskDescription = value;
 		}
@@ -216,81 +199,62 @@ namespace RichRememberTheMilk.Tests.ViewModel
 	
 		
 
-		public void And_TaskList_PropertyChangeRecording_is_Started()
+		//And
+		public void TaskList_PropertyChangeRecording_is_Started()
 		{
 			viewModel.PropertyChangeRecorder.Start();
 		}
 
-		public void When_Name_is_set(String value)
-		{
-			viewModel.Name = value;
-		}
-		
-		public void When_Tasks_is_set(ObservableCollection<Task> value)
-		{
-			viewModel.Tasks = value;
-		}
-		
-		public void When_NewTaskDescription_is_set(string value)
-		{
-			viewModel.NewTaskDescription = value;
-		}
-		
-		
-		public void When_TaskList_is_spawned()
+		//When
+		public void TaskList_is_spawned()
 		{
 			viewModel = new TaskList();
 		} 
 		
-		public void And_Add_Command_is_executed()
+		//And
+		public void Add_Command_is_executed()
 		{
 			viewModel.Add.Execute(null);
 		}
 
-		public void When_execute_Add_Command()
+		//When
+		public void execute_Add_Command()
 		{
 			viewModel.Add.Execute(null);
 		}
-		public void And_Complete_Command_is_executed()
+		public void Complete_Command_is_executed()
 		{
 			viewModel.Complete.Execute(null);
 		}
 
-		public void When_execute_Complete_Command()
+		//When
+		public void execute_Complete_Command()
 		{
 			viewModel.Complete.Execute(null);
 		}
-		public void And_Postpone_Command_is_executed()
+		public void Postpone_Command_is_executed()
 		{
 			viewModel.Postpone.Execute(null);
 		}
 
-		public void When_execute_Postpone_Command()
+		//When
+		public void execute_Postpone_Command()
 		{
 			viewModel.Postpone.Execute(null);
 		}
-		public void And_Delete_Command_is_executed()
+		public void Delete_Command_is_executed()
 		{
 			viewModel.Delete.Execute(null);
 		}
 
-		public void When_execute_Delete_Command()
+		//When
+		public void execute_Delete_Command()
 		{
 			viewModel.Delete.Execute(null);
 		}
-			
-		public void And(string description, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
+	}
 
-		public void When(string description, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
-}
-
-	public abstract class TaskTestContext : TestContext
+	public abstract class TaskTestContext<T> : ScenarioClass<T> where T: class
 	{
 		protected Task viewModel;
 
@@ -315,63 +279,53 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			Before();
 		}
 
-		private void ConfigureRepositories()
-		{
-		}
-
-		/*protected void Given_Repositories_are_configured()
-		{
-			ConfigureRepositories();
-		}
-
-		protected void And_Repositories_are_configured()
-		{
-			ConfigureRepositories();
-		}*/
-
 		protected virtual void Before()
 		{
 		}
 
-		public void Given_dependencies_are_configured(Action<DependencyConfigSemantics> configAction)
+		[TearDown]
+		public void TearDown()
+		{
+			After();
+			Task.RemoveAllGlobalDependencies();
+		}
+
+		protected virtual void After()
+		{
+		}
+
+		//Given
+		public void dependencies_are_configured(Action<DependencyConfigSemantics> configAction)
 		{
 			Task.ConfigureGlobalDependencies(configAction);
 		}
 
-		public void Given_Task_is_created()
+		//Given & And
+		public void Task_is_created()
 		{
 			viewModel = new Task();
 		}
 
-		public void Given(string text, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
-
-		public void And_Task_is_created()
-		{
-			viewModel = new Task();
-		}
-
-		public void And_Description_is_set(String value)
+		//And
+		public void Description_is_set(String value)
 		{
 			viewModel.Description = value;
 		}
 
 	
-		public void And_Due_is_set(DateTime value)
+		public void Due_is_set(DateTime value)
 		{
 			viewModel.Due = value;
 		}
 
 	
-		public void And_Completed_is_set(bool value)
+		public void Completed_is_set(bool value)
 		{
 			viewModel.Completed = value;
 		}
 
 	
-		public void And_IsSelected_is_set(bool value)
+		public void IsSelected_is_set(bool value)
 		{
 			viewModel.IsSelected = value;
 		}
@@ -379,48 +333,20 @@ namespace RichRememberTheMilk.Tests.ViewModel
 	
 		
 
-		public void And_Task_PropertyChangeRecording_is_Started()
+		//And
+		public void Task_PropertyChangeRecording_is_Started()
 		{
 			viewModel.PropertyChangeRecorder.Start();
 		}
 
-		public void When_Description_is_set(String value)
-		{
-			viewModel.Description = value;
-		}
-		
-		public void When_Due_is_set(DateTime value)
-		{
-			viewModel.Due = value;
-		}
-		
-		public void When_Completed_is_set(bool value)
-		{
-			viewModel.Completed = value;
-		}
-		
-		public void When_IsSelected_is_set(bool value)
-		{
-			viewModel.IsSelected = value;
-		}
-		
-		
-		public void When_Task_is_spawned()
+		//When
+		public void Task_is_spawned()
 		{
 			viewModel = new Task();
 		} 
 		
-			
-		public void And(string description, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
-
-		public void When(string description, Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
-}
+		//And
+	}
 
 }
 
