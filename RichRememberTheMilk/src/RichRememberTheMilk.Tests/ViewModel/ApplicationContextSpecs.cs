@@ -13,7 +13,7 @@ namespace RichRememberTheMilk.Tests.ViewModel
     public class ApplicationContextSpecs
     {
         [TestFixture]
-        public class When_spawned : ApplicationContextTestContext<When_spawned>
+        public class When_spawned : ApplicationContextTestScenario<When_spawned>
         {
             protected override void Before()
             {
@@ -28,7 +28,7 @@ namespace RichRememberTheMilk.Tests.ViewModel
         }
 
         [TestFixture]
-        public class When_initialized : ApplicationContextTestContext<When_initialized>
+        public class When_initialized : ApplicationContextTestScenario<When_initialized>
         {
             protected override void Before()
             {

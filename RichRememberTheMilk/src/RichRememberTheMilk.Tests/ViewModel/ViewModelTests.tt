@@ -4,7 +4,7 @@
 <#@ include file="$(SolutionDir)..\..\tools\TinyMVVM\DotNet4\CodeGen\ViewModelTestsTemplate.tt" #>
 <#
 // <copyright file="Tests.tt" company="Microsoft">
-//  Copyright © Microsoft. All Rights Reserved.
+//  Copyright © Microsoft. All Rights Reserved.@
 // </copyright>
 	string dslFile = Host.ResolvePath(@"..\..\RichRememberTheMilk\ViewModel\ViewModel.mvvm");
 	

@@ -13,7 +13,7 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
     public class TaskListSpecs
     {
         [TestFixture]
-        public class When_spawned : TaskListTestContext<When_spawned>
+        public class When_spawned : TaskListTestScenario<When_spawned>
         {
             protected override void Before()
             {
@@ -53,7 +53,7 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
         }
 
         [TestFixture]
-        public class When_NewTaskDesription_is_empty : TaskListTestContext<When_NewTaskDesription_is_empty>
+        public class When_NewTaskDesription_is_empty : TaskListTestScenario<When_NewTaskDesription_is_empty>
         {
             protected override void Before()
             {
@@ -71,7 +71,7 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
         }
 
         [TestFixture]
-        public class When_Add : TaskListTestContext<When_Add>
+        public class When_Add : TaskListTestScenario<When_Add>
         {
             protected override void Before()
             {
@@ -96,7 +96,7 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
         }
 
         [TestFixture]
-        public class When_Select_Task : TaskListTestContext<When_Select_Task>
+        public class When_Select_Task : TaskListTestScenario<When_Select_Task>
         {
             protected override void Before()
             {
@@ -125,7 +125,7 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
         }
 
         [TestFixture]
-        public class When_UnSelect_Task : TaskListTestContext<When_UnSelect_Task>
+        public class When_UnSelect_Task : TaskListTestScenario<When_UnSelect_Task>
         {
             protected override void Before()
             {

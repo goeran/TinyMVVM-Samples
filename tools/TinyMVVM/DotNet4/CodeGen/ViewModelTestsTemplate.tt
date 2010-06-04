@@ -42,7 +42,8 @@ namespace <#= Namespace #>
 	}
 
 <#+ foreach (ViewModel viewModel in modelSpec.ViewModels){#>
-	public abstract class <#= viewModel.Name #>TestContext<T> : ScenarioClass<T> where T: class
+	public abstract class <#= viewModel.Name#>TestScenario<T> : ScenarioClass<T>
+		where T: class
 	{
 		protected <#= viewModel.Name#> viewModel;
 
@@ -125,20 +126,19 @@ namespace <#= Namespace #>
 			viewModel = new <#= viewModel.Name#>();
 		} 
 		
-		//And
+		//Whens
 	<#+ foreach (ViewModelCommand command in viewModel.Commands) {#>
 	public void <#= command.Name#>_Command_is_executed()
 		{
 			viewModel.<#= command.Name#>.Execute(null);
 		}
 
-		//When
 		public void execute_<#= command.Name#>_Command()
 		{
 			viewModel.<#= command.Name#>.Execute(null);
 		}
 	<#+ }#>
-}
+	}
 
 <#+ }#>
 }

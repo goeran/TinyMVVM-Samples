@@ -23,7 +23,8 @@ namespace RichRememberTheMilk.Tests.ViewModel
         protected T Then { get { return this as T; } }
 	}
 
-	public abstract class ApplicationContextTestContext<T> : ScenarioClass<T> where T: class
+	public abstract class ApplicationContextTestScenario<T> : ScenarioClass<T>
+		where T: class
 	{
 		protected ApplicationContext viewModel;
 
@@ -107,10 +108,11 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			viewModel = new ApplicationContext();
 		} 
 		
-		//And
-	}
+		//Whens
+		}
 
-	public abstract class TaskListTestContext<T> : ScenarioClass<T> where T: class
+	public abstract class TaskListTestScenario<T> : ScenarioClass<T>
+		where T: class
 	{
 		protected TaskList viewModel;
 
@@ -211,13 +213,12 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			viewModel = new TaskList();
 		} 
 		
-		//And
+		//Whens
 		public void Add_Command_is_executed()
 		{
 			viewModel.Add.Execute(null);
 		}
 
-		//When
 		public void execute_Add_Command()
 		{
 			viewModel.Add.Execute(null);
@@ -227,7 +228,6 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			viewModel.Complete.Execute(null);
 		}
 
-		//When
 		public void execute_Complete_Command()
 		{
 			viewModel.Complete.Execute(null);
@@ -237,7 +237,6 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			viewModel.Postpone.Execute(null);
 		}
 
-		//When
 		public void execute_Postpone_Command()
 		{
 			viewModel.Postpone.Execute(null);
@@ -247,14 +246,14 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			viewModel.Delete.Execute(null);
 		}
 
-		//When
 		public void execute_Delete_Command()
 		{
 			viewModel.Delete.Execute(null);
 		}
-	}
+		}
 
-	public abstract class TaskTestContext<T> : ScenarioClass<T> where T: class
+	public abstract class TaskTestScenario<T> : ScenarioClass<T>
+		where T: class
 	{
 		protected Task viewModel;
 
@@ -345,8 +344,8 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			viewModel = new Task();
 		} 
 		
-		//And
-	}
+		//Whens
+		}
 
 }
 
