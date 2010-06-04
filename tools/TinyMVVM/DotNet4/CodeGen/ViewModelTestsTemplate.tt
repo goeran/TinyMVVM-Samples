@@ -113,7 +113,7 @@ namespace <#= Namespace #>
 	<#+ } #>
 
 	<#+ }#>	
-	
+
 		public void And_<#= viewModel.Name#>_PropertyChangeRecording_is_Started()
 		{
 			viewModel.PropertyChangeRecorder.Start();
