@@ -1,24 +1,39 @@
-﻿<UserControl x:Class="RichRememberTheMilk.WPF.Views.TaskListView"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Views="clr-namespace:RichRememberTheMilk.WPF.Views" mc:Ignorable="d" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Views="clr-namespace:RichRememberTheMilk.WPF.Views" xmlns:ViewModel="clr-namespace:RichRememberTheMilk.ViewModel;assembly=RichRememberTheMilk.Desktop" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="RichRememberTheMilk.WPF.Views.TaskListView"
+             mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <DataTemplate x:Key="TaskDataTemplate">
             <Views:TaskView/>
         </DataTemplate>
+    	<DataTemplate x:Key="MoreActionDataTemplate">
+    		<Grid>
+    			<Button Content="Action" Margin="4" Command="{Binding}"/>
+    		</Grid>
+    	</DataTemplate>
     </UserControl.Resources>
+	<d:DataContext>
+		<ViewModel:TaskList/>
+	</d:DataContext>
     <Grid>
         <ListBox HorizontalAlignment="Stretch" 
                  Margin="8,67,8,0" 
                  VerticalAlignment="Stretch" 
                  ItemTemplate="{DynamicResource TaskDataTemplate}" 
                  ItemsSource="{Binding Tasks}" Background="{x:Null}"/>
-        <Button Content="Complete" HorizontalAlignment="Left" Height="24" Margin="8,8,0,0" VerticalAlignment="Top" Width="64"/>
+        <Button Content="Complete" HorizontalAlignment="Left" Height="24" Margin="8,8,0,0" VerticalAlignment="Top" Width="64" Command="{Binding Complete}"/>
         <Button Content="Postpone" HorizontalAlignment="Left" Height="24" Margin="76,8,0,0" VerticalAlignment="Top" Width="64"/>
-        <ComboBox Height="24" Margin="144,8,8,0" VerticalAlignment="Top"/>
-        <TextBox Height="23" Margin="8,40,8,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ComboBox Height="24" Margin="144,8,8,0" VerticalAlignment="Top" ItemsSource="{Binding MoreActions}" ItemTemplate="{DynamicResource MoreActionDataTemplate}"/>
+        <TextBox x:Name="txtNewTaskDescription" 
+                 Height="23"
+                 Margin="8,40,8,0" 
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top" 
+                 Text="{Binding NewTaskDescription}"
+                 KeyUp="txtNewTaskDescription_KeyDown"/>
 
     </Grid>
 </UserControl>

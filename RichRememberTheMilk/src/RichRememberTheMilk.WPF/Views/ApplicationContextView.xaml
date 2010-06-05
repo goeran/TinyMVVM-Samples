@@ -10,7 +10,8 @@
         <ViewModel:ApplicationContext/>
     </d:UserControl.DataContext>
     <Grid>
-    	<TabControl ItemsSource="{Binding TasksLists}">
+    	<TabControl ItemsSource="{Binding TasksLists}"
+                    SelectedItem="{Binding SelectedList}">
 	    <TabControl.ItemContainerStyle>
 	        <Style TargetType="TabItem">
 	            <Setter Property="Header" Value="{Binding Name}"/>

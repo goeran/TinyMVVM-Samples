@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Moq;
 using NUnit.Framework;
 using RichRememberTheMilk.ViewModel;
@@ -37,6 +38,19 @@ namespace RichRememberTheMilk.Tests.ViewModel
                 When.ApplicationContext_is_spawned();
             }
 
+            [Test]
+            public void Then_assure_tasksLists_are_loaded()
+            {
+                viewModel.TasksLists.Count.ShouldBe(1);
+            }
+
+            [Test]
+            public void Then_assure_first_TaskList_is_set_as_SelectedList()
+            {
+                viewModel.SelectedList.ShouldBe(viewModel.TasksLists.First());
+            }
+
+
             private void there_are_TaskLists_in_the_repository()
             {
                 TaskListRepositoryFake.Setup(r =>
@@ -44,12 +58,6 @@ namespace RichRememberTheMilk.Tests.ViewModel
                     {
                         new TaskList()
                     });
-            }
-
-            [Test]
-            public void Then_assure_tasksLists_are_loaded()
-            {
-                viewModel.TasksLists.Count.ShouldBe(1);
             }
         }
     }

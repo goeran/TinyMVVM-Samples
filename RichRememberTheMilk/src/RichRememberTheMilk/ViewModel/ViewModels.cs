@@ -92,6 +92,23 @@ namespace RichRememberTheMilk.ViewModel
 		}
 		private string _NewTaskDescription;
 
+		public ObservableCollection<DelegateCommand> MoreActions
+		{
+			get { return _MoreActions; }
+			set
+			{
+				if (value != _MoreActions)
+				{
+					UIInvoker.Invoke(() =>
+					{
+						_MoreActions = value;
+						TriggerPropertyChanged("MoreActions");
+					});
+				}
+			}
+		}
+		private ObservableCollection<DelegateCommand> _MoreActions;
+
 	
 		
 		//Commands
@@ -99,6 +116,7 @@ namespace RichRememberTheMilk.ViewModel
 		public DelegateCommand Complete { get; set; }
 		public DelegateCommand Remove { get; set; }
 		public DelegateCommand SelectAll { get; set; }
+		public DelegateCommand UnSelectAll { get; set; }
 		
 		public TaskList()
 		{
@@ -106,11 +124,13 @@ namespace RichRememberTheMilk.ViewModel
 
 				Tasks = new ObservableCollection<Task>();
 			SelectedTasks = new List<Task>();
-		
+				MoreActions = new ObservableCollection<DelegateCommand>();
+	
 			Add = new DelegateCommand();
 			Complete = new DelegateCommand();
 			Remove = new DelegateCommand();
 			SelectAll = new DelegateCommand();
+			UnSelectAll = new DelegateCommand();
 			
 			ApplyDefaultConventions();
 		}

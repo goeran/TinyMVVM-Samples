@@ -19,6 +19,12 @@ namespace RichRememberTheMilk.Controllers
             this.viewModel = viewModel;
 
             LoadAllTaskLists();
+            SetFirstTaskListAsSelectedList();
+        }
+
+        private void SetFirstTaskListAsSelectedList()
+        {
+            viewModel.SelectedList = viewModel.TasksLists.FirstOrDefault();
         }
 
         private void LoadAllTaskLists()

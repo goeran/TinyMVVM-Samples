@@ -11,7 +11,15 @@ namespace RichRememberTheMilk.ViewModel
     {
         public void OnInitialize()
         {
+            PopulateMoreActions();
             Tasks.CollectionChanged += Tasks_CollectionChanged;
+        }
+
+        private void PopulateMoreActions()
+        {
+            MoreActions.Add(SelectAll);
+            MoreActions.Add(UnSelectAll);
+            MoreActions.Add(Remove);
         }
 
         void Tasks_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -76,9 +84,13 @@ namespace RichRememberTheMilk.ViewModel
         public void OnSelectAll()
         {
             foreach (var task in Tasks)
-            {
                 task.IsSelected = true;
-            }
+        }
+
+        public void OnUnSelectAll()
+        {
+            foreach (var task in Tasks)
+                task.IsSelected = false;
         }
     }
 }

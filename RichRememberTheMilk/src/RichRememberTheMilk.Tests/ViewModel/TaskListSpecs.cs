@@ -44,6 +44,22 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
                 viewModel.Add.ShouldNotBeNull();
             }
 
+            [Test]
+            public void Then_assure_it_has_MoreActions()
+            {
+                viewModel.MoreActions.ShouldNotBeNull();
+            }
+
+            [Test]
+            public void Then_assure_MoreActions_is_populated()
+            {
+                viewModel.MoreActions.ShouldContain(viewModel.SelectAll);
+                viewModel.MoreActions.ShouldContain(viewModel.Remove);
+                viewModel.MoreActions.ShouldContain(viewModel.UnSelectAll);
+            }
+
+
+
         }
 
         [TestFixture]
@@ -188,6 +204,26 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
             public void Then_assure_all_tasks_are_selected()
             {
                 viewModel.SelectedTasks.Count.ShouldBe(viewModel.Tasks.Count);   
+            }
+
+        }
+
+        [TestFixture]
+        public class When_UnSelectAll : SharedTaskListScenario<When_UnSelectAll>
+        {
+            protected override void Before()
+            {
+                Given.TaskList_is_created();
+                And.it_contains_tasks(ten);
+                And.Tasks_are_selected(5);
+
+                When.execute_UnSelectAll_Command();
+            }
+
+            [Test]
+            public void Then_assure_no_tasks_are_selected()
+            {
+                viewModel.SelectedTasks.Count.ShouldBe(0);
             }
 
         }

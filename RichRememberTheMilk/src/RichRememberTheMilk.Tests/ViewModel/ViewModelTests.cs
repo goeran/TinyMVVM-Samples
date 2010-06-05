@@ -194,6 +194,17 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		}
 
 	
+		public void MoreActions_is_set(ObservableCollection<DelegateCommand> value)
+		{
+			viewModel.MoreActions = value;
+		}
+
+		//When
+	public void add_MoreAction(Action unitOfWork)
+		{
+			unitOfWork.Invoke();
+		}
+	
 		
 
 		//And
@@ -244,6 +255,15 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		public void execute_SelectAll_Command()
 		{
 			viewModel.SelectAll.Execute(null);
+		}
+		public void UnSelectAll_Command_is_executed()
+		{
+			viewModel.UnSelectAll.Execute(null);
+		}
+
+		public void execute_UnSelectAll_Command()
+		{
+			viewModel.UnSelectAll.Execute(null);
 		}
 		}
 

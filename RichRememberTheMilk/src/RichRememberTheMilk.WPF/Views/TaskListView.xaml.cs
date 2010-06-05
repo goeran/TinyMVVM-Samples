@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RichRememberTheMilk.ViewModel;
 
 namespace RichRememberTheMilk.WPF.Views
 {
@@ -19,9 +20,28 @@ namespace RichRememberTheMilk.WPF.Views
     /// </summary>
     public partial class TaskListView : UserControl
     {
+        private TaskList ViewModel
+        {
+            get
+            {
+                return DataContext as TaskList;
+            }
+        }
+
         public TaskListView()
         {
             InitializeComponent();
+        }
+
+        private void txtNewTaskDescription_KeyDown(object sender, KeyEventArgs e)
+        {
+            var binding = BindingOperations.GetBindingExpression(sender as TextBox, TextBox.TextProperty);
+            binding.UpdateSource();
+
+            if (e.Key == Key.Enter)
+            {
+                ViewModel.Add.Execute(null);
+            }
         }
     }
 }
