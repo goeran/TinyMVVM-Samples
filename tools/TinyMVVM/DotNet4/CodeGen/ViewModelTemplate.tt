@@ -71,7 +71,8 @@ public <#= property.Type#> <#= property.Name#> { get; set; }
 			//ConfigureRepository();
 
 	<#+ foreach (ViewModelProperty property in viewModel.Properties) {#>
-	<#+ if (!property.IsPrimitiveType) {#>
+	<#+ if (!property.IsPrimitiveType &&
+			!property.Type.StartsWith("I")) {#>
 	<#= property.Name#> = new <#= property.Type#>();
 	<#+ }#>
 <#+ }#>

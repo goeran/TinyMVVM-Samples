@@ -6,8 +6,8 @@ using TinyMVVM.Framework.Services;
 using System;
 using System.Linq;
 using TinyMVVM.Framework;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using RichRememberTheMilk.DataAccess;
 
 namespace RichRememberTheMilk.ViewModel.Repositories
 {

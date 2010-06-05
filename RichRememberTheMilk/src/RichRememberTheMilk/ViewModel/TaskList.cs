@@ -19,9 +19,12 @@ namespace RichRememberTheMilk.ViewModel
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 foreach (Task task in e.NewItems)
-                {
                     task.PropertyChanged += task_PropertyChanged;
-                }
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Task task in e.OldItems)
+                    task.PropertyChanged -= task_PropertyChanged;
             }
         }
 
@@ -29,10 +32,15 @@ namespace RichRememberTheMilk.ViewModel
         {
             if (e.PropertyName == "IsSelected")
             {
-                var task = sender as Task;
-                if (task.IsSelected)
-                    SelectedTasks.Add(task);
+                SelectedTasks = GetSelectedTasks();
             }
+        }
+
+        private IEnumerable<Task> GetSelectedTasks()
+        {
+            return (from task in Tasks
+                   where task.IsSelected
+                   select task).ToList();
         }
 
         public void OnAdd()
@@ -48,6 +56,13 @@ namespace RichRememberTheMilk.ViewModel
         public bool CanAdd()
         {
             return !string.IsNullOrEmpty(NewTaskDescription);
+        }
+
+        public void OnRemove()
+        {
+            foreach (var selectedTask in SelectedTasks)
+                Tasks.Remove(selectedTask);
+            SelectedTasks = GetSelectedTasks();
         }
     }
 }

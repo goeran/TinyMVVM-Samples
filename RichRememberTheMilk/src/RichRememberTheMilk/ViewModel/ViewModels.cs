@@ -4,8 +4,8 @@ using TinyMVVM.Framework.Services;
 using System;
 using System.Linq;
 using TinyMVVM.Framework;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using RichRememberTheMilk.DataAccess;
 using RichRememberTheMilk.ViewModel.Repositories;
 
 namespace RichRememberTheMilk.ViewModel
@@ -74,7 +74,7 @@ namespace RichRememberTheMilk.ViewModel
 		private String _Name;
 
 		public ObservableCollection<Task> Tasks { get; set; } 
-		public ObservableCollection<Task> SelectedTasks { get; set; } 
+		public IEnumerable<Task> SelectedTasks { get; set; } 
 		public string NewTaskDescription
 		{
 			get { return _NewTaskDescription; }
@@ -98,19 +98,18 @@ namespace RichRememberTheMilk.ViewModel
 		public DelegateCommand Add { get; set; }
 		public DelegateCommand Complete { get; set; }
 		public DelegateCommand Postpone { get; set; }
-		public DelegateCommand Delete { get; set; }
+		public DelegateCommand Remove { get; set; }
 		
 		public TaskList()
 		{
 			//ConfigureRepository();
 
 				Tasks = new ObservableCollection<Task>();
-			SelectedTasks = new ObservableCollection<Task>();
-		
+			
 			Add = new DelegateCommand();
 			Complete = new DelegateCommand();
 			Postpone = new DelegateCommand();
-			Delete = new DelegateCommand();
+			Remove = new DelegateCommand();
 			
 			ApplyDefaultConventions();
 		}
@@ -193,16 +192,37 @@ namespace RichRememberTheMilk.ViewModel
 		}
 		private bool _IsSelected;
 
+		public byte Priority
+		{
+			get { return _Priority; }
+			set
+			{
+				if (value != _Priority)
+				{
+					UIInvoker.Invoke(() =>
+					{
+						_Priority = value;
+						TriggerPropertyChanged("Priority");
+					});
+				}
+			}
+		}
+		private byte _Priority;
+
 	
 		
 		//Commands
+		public DelegateCommand Postpone { get; set; }
+		public DelegateCommand Complete { get; set; }
 		
 		public Task()
 		{
 			//ConfigureRepository();
 
 				Due = new DateTime();
-			
+				
+			Postpone = new DelegateCommand();
+			Complete = new DelegateCommand();
 			
 			ApplyDefaultConventions();
 		}

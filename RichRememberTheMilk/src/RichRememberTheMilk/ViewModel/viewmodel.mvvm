@@ -1,8 +1,8 @@
 ﻿using System
 using System.Linq
 using TinyMVVM.Framework
+using System.Collections.Generic
 using System.Collections.ObjectModel
-using RichRememberTheMilk.DataAccess
 
 viewmodel ApplicationContext:
 	property TasksLists as ObservableCollection<TaskList>
@@ -11,17 +11,20 @@ viewmodel ApplicationContext:
 viewmodel TaskList:
 	oproperty Name as String
 	property Tasks as ObservableCollection<Task>
-	property SelectedTasks as ObservableCollection<Task>
+	property SelectedTasks as IEnumerable<Task>
 	oproperty NewTaskDescription as string
 
 	command Add
 	command Complete
 	command Postpone
-	command Delete
+	command Remove
 
 viewmodel Task:
 	oproperty Description as String
 	oproperty Due as DateTime
 	oproperty Completed as bool
 	oproperty IsSelected as bool
+	oproperty Priority as byte
 
+	command Postpone
+	command Complete

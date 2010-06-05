@@ -10,8 +10,8 @@ using TinyMVVM.Framework.Services;
 using System;
 using System.Linq;
 using TinyMVVM.Framework;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using RichRememberTheMilk.DataAccess;
 
 namespace RichRememberTheMilk.Tests.ViewModel
 {
@@ -182,16 +182,11 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			unitOfWork.Invoke();
 		}
 	
-		public void SelectedTasks_is_set(ObservableCollection<Task> value)
+		public void SelectedTasks_is_set(IEnumerable<Task> value)
 		{
 			viewModel.SelectedTasks = value;
 		}
 
-		//When
-	public void add_SelectedTask(Action unitOfWork)
-		{
-			unitOfWork.Invoke();
-		}
 	
 		public void NewTaskDescription_is_set(string value)
 		{
@@ -241,14 +236,14 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		{
 			viewModel.Postpone.Execute(null);
 		}
-		public void Delete_Command_is_executed()
+		public void Remove_Command_is_executed()
 		{
-			viewModel.Delete.Execute(null);
+			viewModel.Remove.Execute(null);
 		}
 
-		public void execute_Delete_Command()
+		public void execute_Remove_Command()
 		{
-			viewModel.Delete.Execute(null);
+			viewModel.Remove.Execute(null);
 		}
 		}
 
