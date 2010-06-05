@@ -36,7 +36,7 @@ namespace RichRememberTheMilk.ViewModel
             }
         }
 
-        private IEnumerable<Task> GetSelectedTasks()
+        private List<Task> GetSelectedTasks()
         {
             return (from task in Tasks
                    where task.IsSelected
@@ -63,6 +63,22 @@ namespace RichRememberTheMilk.ViewModel
             foreach (var selectedTask in SelectedTasks)
                 Tasks.Remove(selectedTask);
             SelectedTasks = GetSelectedTasks();
+        }
+
+        public void OnComplete()
+        {
+            SelectedTasks.ForEach(task =>
+            {
+                task.Complete.Execute(null);
+            });
+        }
+
+        public void OnSelectAll()
+        {
+            foreach (var task in Tasks)
+            {
+                task.IsSelected = true;
+            }
         }
     }
 }

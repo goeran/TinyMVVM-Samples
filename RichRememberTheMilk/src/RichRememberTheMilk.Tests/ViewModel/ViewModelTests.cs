@@ -182,7 +182,7 @@ namespace RichRememberTheMilk.Tests.ViewModel
 			unitOfWork.Invoke();
 		}
 	
-		public void SelectedTasks_is_set(IEnumerable<Task> value)
+		public void SelectedTasks_is_set(List<Task> value)
 		{
 			viewModel.SelectedTasks = value;
 		}
@@ -227,15 +227,6 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		{
 			viewModel.Complete.Execute(null);
 		}
-		public void Postpone_Command_is_executed()
-		{
-			viewModel.Postpone.Execute(null);
-		}
-
-		public void execute_Postpone_Command()
-		{
-			viewModel.Postpone.Execute(null);
-		}
 		public void Remove_Command_is_executed()
 		{
 			viewModel.Remove.Execute(null);
@@ -244,6 +235,15 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		public void execute_Remove_Command()
 		{
 			viewModel.Remove.Execute(null);
+		}
+		public void SelectAll_Command_is_executed()
+		{
+			viewModel.SelectAll.Execute(null);
+		}
+
+		public void execute_SelectAll_Command()
+		{
+			viewModel.SelectAll.Execute(null);
 		}
 		}
 
@@ -313,15 +313,21 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		}
 
 	
-		public void Completed_is_set(bool value)
+		public void IsCompleted_is_set(bool value)
 		{
-			viewModel.Completed = value;
+			viewModel.IsCompleted = value;
 		}
 
 	
 		public void IsSelected_is_set(bool value)
 		{
 			viewModel.IsSelected = value;
+		}
+
+	
+		public void Priority_is_set(byte value)
+		{
+			viewModel.Priority = value;
 		}
 
 	
@@ -340,6 +346,15 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		} 
 		
 		//Whens
+		public void Complete_Command_is_executed()
+		{
+			viewModel.Complete.Execute(null);
+		}
+
+		public void execute_Complete_Command()
+		{
+			viewModel.Complete.Execute(null);
+		}
 		}
 
 }

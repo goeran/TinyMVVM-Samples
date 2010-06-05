@@ -21,7 +21,7 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
             [Test]
             public void assure_Completed_is_false_by_default()
             {
-                viewModel.Completed.ShouldBeFalse();
+                viewModel.IsCompleted.ShouldBeFalse();
             }
 
             [Test]

@@ -74,7 +74,7 @@ namespace RichRememberTheMilk.ViewModel
 		private String _Name;
 
 		public ObservableCollection<Task> Tasks { get; set; } 
-		public IEnumerable<Task> SelectedTasks { get; set; } 
+		public List<Task> SelectedTasks { get; set; } 
 		public string NewTaskDescription
 		{
 			get { return _NewTaskDescription; }
@@ -97,19 +97,20 @@ namespace RichRememberTheMilk.ViewModel
 		//Commands
 		public DelegateCommand Add { get; set; }
 		public DelegateCommand Complete { get; set; }
-		public DelegateCommand Postpone { get; set; }
 		public DelegateCommand Remove { get; set; }
+		public DelegateCommand SelectAll { get; set; }
 		
 		public TaskList()
 		{
 			//ConfigureRepository();
 
 				Tasks = new ObservableCollection<Task>();
-			
+			SelectedTasks = new List<Task>();
+		
 			Add = new DelegateCommand();
 			Complete = new DelegateCommand();
-			Postpone = new DelegateCommand();
 			Remove = new DelegateCommand();
+			SelectAll = new DelegateCommand();
 			
 			ApplyDefaultConventions();
 		}
@@ -158,22 +159,22 @@ namespace RichRememberTheMilk.ViewModel
 		}
 		private DateTime _Due;
 
-		public bool Completed
+		public bool IsCompleted
 		{
-			get { return _Completed; }
+			get { return _IsCompleted; }
 			set
 			{
-				if (value != _Completed)
+				if (value != _IsCompleted)
 				{
 					UIInvoker.Invoke(() =>
 					{
-						_Completed = value;
-						TriggerPropertyChanged("Completed");
+						_IsCompleted = value;
+						TriggerPropertyChanged("IsCompleted");
 					});
 				}
 			}
 		}
-		private bool _Completed;
+		private bool _IsCompleted;
 
 		public bool IsSelected
 		{
@@ -212,7 +213,6 @@ namespace RichRememberTheMilk.ViewModel
 	
 		
 		//Commands
-		public DelegateCommand Postpone { get; set; }
 		public DelegateCommand Complete { get; set; }
 		
 		public Task()
@@ -221,7 +221,6 @@ namespace RichRememberTheMilk.ViewModel
 
 				Due = new DateTime();
 				
-			Postpone = new DelegateCommand();
 			Complete = new DelegateCommand();
 			
 			ApplyDefaultConventions();

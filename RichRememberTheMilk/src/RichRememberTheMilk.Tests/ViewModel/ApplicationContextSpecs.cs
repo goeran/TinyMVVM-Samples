@@ -47,7 +47,7 @@ namespace RichRememberTheMilk.Tests.ViewModel
             }
 
             [Test]
-            public void Assure_tasksLists_are_loaded()
+            public void Then_assure_tasksLists_are_loaded()
             {
                 viewModel.TasksLists.Count.ShouldBe(1);
             }

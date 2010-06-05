@@ -11,20 +11,19 @@ viewmodel ApplicationContext:
 viewmodel TaskList:
 	oproperty Name as String
 	property Tasks as ObservableCollection<Task>
-	property SelectedTasks as IEnumerable<Task>
+	property SelectedTasks as List<Task>
 	oproperty NewTaskDescription as string
 
 	command Add
 	command Complete
-	command Postpone
 	command Remove
+	command SelectAll
 
 viewmodel Task:
 	oproperty Description as String
 	oproperty Due as DateTime
-	oproperty Completed as bool
+	oproperty IsCompleted as bool
 	oproperty IsSelected as bool
 	oproperty Priority as byte
 
-	command Postpone
 	command Complete

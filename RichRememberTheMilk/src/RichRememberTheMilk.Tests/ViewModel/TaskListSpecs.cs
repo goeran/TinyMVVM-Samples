@@ -33,12 +33,6 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
             }
 
             [Test]
-            public void Then_assure_it_has_a_Postpone_command()
-            {
-                viewModel.Postpone.ShouldNotBeNull();
-            }
-
-            [Test]
             public void Then_assure_it_has_Delete_command()
             {
                 viewModel.Remove.ShouldNotBeNull();
@@ -157,6 +151,48 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
             }
         }
 
+        [TestFixture]
+        public class When_Complete_selected_tasks : SharedTaskListScenario<When_Complete_selected_tasks>
+        {
+            protected override void Before()
+            {
+                Given.TaskList_is_created();
+                And.it_contains_tasks(ten);
+                And.a_Task_is_selected();
+
+                When.Complete_Command_is_executed();
+            }
+
+            [Test]
+            public void Then_assure_selected_tasks_are_completed()
+            {
+                viewModel.SelectedTasks.ForEach(task =>
+                {
+                    task.IsCompleted.ShouldBeTrue();
+                });
+            }
+        }
+
+        [TestFixture]
+        public class When_SelectAll : SharedTaskListScenario<When_SelectAll>
+        {
+            protected override void Before()
+            {
+                Given.TaskList_is_created();
+                And.it_contains_tasks(ten);
+
+                When.execute_SelectAll_Command();
+            }
+
+            [Test]
+            public void Then_assure_all_tasks_are_selected()
+            {
+                viewModel.SelectedTasks.Count.ShouldBe(viewModel.Tasks.Count);   
+            }
+
+        }
+
+
 
         public class SharedTaskListScenario<T> : TaskListTestScenario<T> where T: class
         {
@@ -178,6 +214,14 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
             protected void a_Task_is_selected()
             {
                 viewModel.Tasks.First().IsSelected = true;
+            }
+
+            protected void Tasks_are_selected(int numberOfTasks)
+            {
+                for (int i = 0; i < numberOfTasks; i++)
+                {
+                    viewModel.Tasks[i].IsSelected = true;
+                }
             }
 
             protected void unselected_Task()
