@@ -21,10 +21,14 @@
 		</DataTemplate>
 	</UserControl.Resources>
     
-    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource ApplicationContextSampleDataSource}}" Background="White">
-    	<ListBox HorizontalAlignment="Left" Margin="8,80,0,8" Width="97" ItemTemplate="{StaticResource TasksListsItemTemplate}" ItemsSource="{Binding TasksLists}" Background="#7E001BFF"/>
+    <Grid x:Name="LayoutRoot" Background="White" d:DataContext="{Binding Source={StaticResource ApplicationContextSampleDataSource}}">
+    	<ListBox HorizontalAlignment="Left" Margin="8,80,0,8" Width="97" 
+                 ItemTemplate="{StaticResource TasksListsItemTemplate}" 
+                 ItemsSource="{Binding TasksLists}" 
+                 SelectedItem="{Binding SelectedList, Mode=TwoWay}" 
+                 Background="#7E001BFF"/>
     	<Image HorizontalAlignment="Left" Height="63" Margin="12,13,0,0" VerticalAlignment="Top" Width="134" Source="/RichRememberTheMilk.Silverlight;component/Resources/Images/rtm-logo.png"/>
-    	<RichRememberTheMilk_Silverlight:TaskListView Margin="109,8,8,8"/>
+    	<RichRememberTheMilk_Silverlight:TaskListView Margin="109,8,8,8" DataContext="{Binding SelectedList}"/>
 
     </Grid>
 </UserControl>

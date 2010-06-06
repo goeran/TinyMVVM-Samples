@@ -9,11 +9,7 @@ namespace RichRememberTheMilk.ViewModel
     {
         public void OnInitialize()
         {
-           
             //CreateController<ApplicationContext>();
-
-            //CreateController<ApplicationContextController>();
-            //RegisterController<ApplicationContextController>();
         }
     }
 }

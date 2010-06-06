@@ -98,6 +98,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -127,14 +128,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SampleData\ApplicationContextSampleDataSource\ApplicationContextSampleDataSource.xaml">
+    <DesignTimeOnly Include="SampleData\ApplicationContextSampleDataSource\ApplicationContextSampleDataSource.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SampleData\TaskListSampleDataSource\TaskListSampleDataSource.xaml">
+    </DesignTimeOnly>
+    <DesignTimeOnly Include="SampleData\TaskListSampleDataSource\TaskListSampleDataSource.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
-    </Page>
+    </DesignTimeOnly>
     <Page Include="Views\ApplicationContextView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

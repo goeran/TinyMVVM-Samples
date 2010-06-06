@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Moq;
 using NUnit.Framework;
+using RichRememberTheMilk.Controllers;
 using RichRememberTheMilk.ViewModel;
 using TinyBDD.Specification.NUnit;
 using TinyMVVM.Framework.Services;

@@ -256,14 +256,14 @@ namespace RichRememberTheMilk.Tests.ViewModel
 		{
 			viewModel.SelectAll.Execute(null);
 		}
-		public void UnSelectAll_Command_is_executed()
+		public void DeselectAll_Command_is_executed()
 		{
-			viewModel.UnSelectAll.Execute(null);
+			viewModel.DeselectAll.Execute(null);
 		}
 
-		public void execute_UnSelectAll_Command()
+		public void execute_DeselectAll_Command()
 		{
-			viewModel.UnSelectAll.Execute(null);
+			viewModel.DeselectAll.Execute(null);
 		}
 		}
 

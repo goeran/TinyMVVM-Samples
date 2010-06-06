@@ -13,13 +13,13 @@ viewmodel TaskList:
 	property Tasks as ObservableCollection<Task>
 	property SelectedTasks as List<Task>
 	oproperty NewTaskDescription as string
-	oproperty MoreActions as ObservableCollection<DelegateCommand>
+	property MoreActions as ObservableCollection<DelegateCommand>
 
 	command Add
 	command Complete
 	command Remove
 	command SelectAll
-	command UnSelectAll
+	command DeselectAll
 
 viewmodel Task:
 	oproperty Description as String

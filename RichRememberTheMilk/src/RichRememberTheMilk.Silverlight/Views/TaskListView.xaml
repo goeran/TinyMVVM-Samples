@@ -15,9 +15,11 @@
 		</DataTemplate>
 	</UserControl.Resources>
 
-	<Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource TaskListSampleDataSource}}">
-		<ScrollViewer Margin="8" ScrollViewer.VerticalScrollBarVisibility="Auto">
+	<Grid x:Name="LayoutRoot" d:DataContext="{Binding Source={StaticResource TaskListSampleDataSource}}">
+		<ScrollViewer Margin="8,80,8,8" ScrollViewer.VerticalScrollBarVisibility="Auto">
 			<ItemsControl ItemTemplate="{StaticResource TasksItemTemplate}" ItemsSource="{Binding Tasks}"/>
 		</ScrollViewer>
+		<Button Content="Select all" HorizontalAlignment="Left" Height="43" Margin="11,16,0,0" VerticalAlignment="Top" Width="74" Command="{Binding SelectAll}"/>
+		<Button Content="Deselect all" HorizontalAlignment="Left" Height="43" Margin="89,16,0,0" VerticalAlignment="Top" Width="74" Command="{Binding DeselectAll}"/>
 	</Grid>
 </UserControl>

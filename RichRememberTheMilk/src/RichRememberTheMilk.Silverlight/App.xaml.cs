@@ -26,6 +26,7 @@ namespace RichRememberTheMilk.Silverlight
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            Bootstrapper.Initialize();
             this.RootVisual = new MainPage();
         }
 

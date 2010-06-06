@@ -8,6 +8,6 @@
 	d:DesignWidth="400" d:DesignHeight="100">
 
 	<Grid x:Name="LayoutRoot">
-		<CheckBox Content="{Binding Description}"/>
+		<CheckBox Content="{Binding Description}" IsChecked="{Binding IsSelected}"/>
 	</Grid>
 </UserControl>

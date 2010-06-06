@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using RichRememberTheMilk.Controllers;
+using RichRememberTheMilk.ViewModel;
 
 namespace RichRememberTheMilk.Silverlight
 {
@@ -17,6 +19,10 @@ namespace RichRememberTheMilk.Silverlight
         public MainPage()
         {
             InitializeComponent();
+
+            var viewModel = new ApplicationContext();
+            viewModel.CreateController<ApplicationContextController>();
+            DataContext = viewModel;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace RichRememberTheMilk.ViewModel
         private void PopulateMoreActions()
         {
             MoreActions.Add(SelectAll);
-            MoreActions.Add(UnSelectAll);
+            MoreActions.Add(DeselectAll);
             MoreActions.Add(Remove);
         }
 
@@ -86,9 +86,15 @@ namespace RichRememberTheMilk.ViewModel
         {
             foreach (var task in Tasks)
                 task.IsSelected = true;
+            SelectAll.TriggerCanExecuteChanged();
         }
 
-        public void OnUnSelectAll()
+        public bool CanSelectAll()
+        {
+            return Tasks.Where(t => t.IsSelected).Count() != Tasks.Count;
+        }
+
+        public void OnDeselectAll()
         {
             foreach (var task in Tasks)
                 task.IsSelected = false;

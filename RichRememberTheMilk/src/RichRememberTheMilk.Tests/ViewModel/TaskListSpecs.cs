@@ -55,7 +55,7 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
             {
                 viewModel.MoreActions.ShouldContain(viewModel.SelectAll);
                 viewModel.MoreActions.ShouldContain(viewModel.Remove);
-                viewModel.MoreActions.ShouldContain(viewModel.UnSelectAll);
+                viewModel.MoreActions.ShouldContain(viewModel.DeselectAll);
             }
 
 
@@ -217,7 +217,7 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
                 And.it_contains_tasks(ten);
                 And.Tasks_are_selected(5);
 
-                When.execute_UnSelectAll_Command();
+                When.execute_DeselectAll_Command();
             }
 
             [Test]
@@ -228,7 +228,26 @@ namespace RichRememberTheMilk.Desktop.Tests.ViewModel
 
         }
 
+        [TestFixture]
+        public class When_all_Tasks_are_selected : SharedTaskListScenario<When_all_Tasks_are_selected>
+        {
+            private bool canSelectAll;
 
+            protected override void Before()
+            {
+                Given.TaskList_is_created();
+                And.it_contains_tasks(ten);
+                And.Tasks_are_selected(ten);
+
+                canSelectAll = viewModel.SelectAll.CanExecute(null);
+            }
+
+            [Test]
+            public void Then_assure_it_is_not_possible_to_execute_SelectAll_command()
+            {
+                canSelectAll.ShouldBe(false);
+            }
+        }
 
         public class SharedTaskListScenario<T> : TaskListTestScenario<T> where T: class
         {
