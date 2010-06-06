@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using TinyMVVM.Framework;
 
 namespace RichRememberTheMilk.ViewModel
 {

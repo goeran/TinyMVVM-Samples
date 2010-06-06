@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichRememberTheMilk", "Rich
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichRememberTheMilk.Tests", "RichRememberTheMilk.Tests\RichRememberTheMilk.Tests.csproj", "{9C6A0596-9348-4F72-B282-B616827530D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichRememberTheMilk.Silverlight", "RichRememberTheMilk.Silverlight\RichRememberTheMilk.Silverlight.csproj", "{0A78D860-D69A-430F-97ED-E776633E2CB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,16 @@ Global
 		{9C6A0596-9348-4F72-B282-B616827530D6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9C6A0596-9348-4F72-B282-B616827530D6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9C6A0596-9348-4F72-B282-B616827530D6}.Release|x86.ActiveCfg = Release|Any CPU
+		{0A78D860-D69A-430F-97ED-E776633E2CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A78D860-D69A-430F-97ED-E776633E2CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A78D860-D69A-430F-97ED-E776633E2CB7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0A78D860-D69A-430F-97ED-E776633E2CB7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0A78D860-D69A-430F-97ED-E776633E2CB7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0A78D860-D69A-430F-97ED-E776633E2CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A78D860-D69A-430F-97ED-E776633E2CB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A78D860-D69A-430F-97ED-E776633E2CB7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0A78D860-D69A-430F-97ED-E776633E2CB7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0A78D860-D69A-430F-97ED-E776633E2CB7}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
