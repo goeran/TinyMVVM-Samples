@@ -1,0 +1,36 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="0A78D860-D69A-430F-97ED-E776633E2CB7/d:ViewModel/f:ApplicationContext.cs/l:..?..?RichRememberTheMilk?ViewModel?ApplicationContext.cs" caret="313" fromTop="10" />
+      <File id="0A78D860-D69A-430F-97ED-E776633E2CB7/f:App.xaml" caret="921" fromTop="7" />
+      <File id="0A78D860-D69A-430F-97ED-E776633E2CB7/f:MainPage.xaml" caret="1" fromTop="0" />
+      <File id="0A78D860-D69A-430F-97ED-E776633E2CB7/d:ViewModel/f:TaskList.cs/l:..?..?RichRememberTheMilk?ViewModel?TaskList.cs" caret="513" fromTop="12" />
+      <File id="2489F7B2-30C2-4C05-9F91-17BB3A9A40B4/d:ViewModel/f:viewmodel.mvvm" caret="452" fromTop="14" />
+      <File id="2489F7B2-30C2-4C05-9F91-17BB3A9A40B4/d:ViewModel/f:ViewModels.cs" caret="2506" fromTop="23" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="0A78D860-D69A-430F-97ED-E776633E2CB7/d:ViewModel/f:ApplicationContext.cs/l:..?..?RichRememberTheMilk?ViewModel?ApplicationContext.cs" caret="313" fromTop="10" />
+      <File id="0A78D860-D69A-430F-97ED-E776633E2CB7/f:App.xaml" caret="948" fromTop="7" />
+      <File id="0A78D860-D69A-430F-97ED-E776633E2CB7/f:MainPage.xaml" caret="573" fromTop="4" />
+      <File id="2489F7B2-30C2-4C05-9F91-17BB3A9A40B4/d:ViewModel/f:viewmodel.mvvm" caret="435" fromTop="14" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+</Configuration>
