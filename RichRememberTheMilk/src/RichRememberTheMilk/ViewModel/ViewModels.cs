@@ -21,11 +21,14 @@ namespace RichRememberTheMilk.ViewModel
 			{
 				if (value != _SelectedList)
 				{
-					UIInvoker.Invoke(() =>
+					_SelectedList = value;
+					TriggerPropertyChanged("SelectedList");
+
+					/*UIInvoker.Invoke(() =>
 					{
 						_SelectedList = value;
 						TriggerPropertyChanged("SelectedList");
-					});
+					});*/
 				}
 			}
 		}
@@ -63,11 +66,14 @@ namespace RichRememberTheMilk.ViewModel
 			{
 				if (value != _Name)
 				{
-					UIInvoker.Invoke(() =>
+					_Name = value;
+					TriggerPropertyChanged("Name");
+
+					/*UIInvoker.Invoke(() =>
 					{
 						_Name = value;
 						TriggerPropertyChanged("Name");
-					});
+					});*/
 				}
 			}
 		}
@@ -82,11 +88,14 @@ namespace RichRememberTheMilk.ViewModel
 			{
 				if (value != _NewTaskDescription)
 				{
-					UIInvoker.Invoke(() =>
+					_NewTaskDescription = value;
+					TriggerPropertyChanged("NewTaskDescription");
+
+					/*UIInvoker.Invoke(() =>
 					{
 						_NewTaskDescription = value;
 						TriggerPropertyChanged("NewTaskDescription");
-					});
+					});*/
 				}
 			}
 		}
@@ -136,11 +145,14 @@ namespace RichRememberTheMilk.ViewModel
 			{
 				if (value != _Description)
 				{
-					UIInvoker.Invoke(() =>
+					_Description = value;
+					TriggerPropertyChanged("Description");
+
+					/*UIInvoker.Invoke(() =>
 					{
 						_Description = value;
 						TriggerPropertyChanged("Description");
-					});
+					});*/
 				}
 			}
 		}
@@ -153,11 +165,14 @@ namespace RichRememberTheMilk.ViewModel
 			{
 				if (value != _Due)
 				{
-					UIInvoker.Invoke(() =>
+					_Due = value;
+					TriggerPropertyChanged("Due");
+
+					/*UIInvoker.Invoke(() =>
 					{
 						_Due = value;
 						TriggerPropertyChanged("Due");
-					});
+					});*/
 				}
 			}
 		}
@@ -170,11 +185,14 @@ namespace RichRememberTheMilk.ViewModel
 			{
 				if (value != _IsCompleted)
 				{
-					UIInvoker.Invoke(() =>
+					_IsCompleted = value;
+					TriggerPropertyChanged("IsCompleted");
+
+					/*UIInvoker.Invoke(() =>
 					{
 						_IsCompleted = value;
 						TriggerPropertyChanged("IsCompleted");
-					});
+					});*/
 				}
 			}
 		}
@@ -187,11 +205,14 @@ namespace RichRememberTheMilk.ViewModel
 			{
 				if (value != _IsSelected)
 				{
-					UIInvoker.Invoke(() =>
+					_IsSelected = value;
+					TriggerPropertyChanged("IsSelected");
+
+					/*UIInvoker.Invoke(() =>
 					{
 						_IsSelected = value;
 						TriggerPropertyChanged("IsSelected");
-					});
+					});*/
 				}
 			}
 		}
@@ -204,11 +225,14 @@ namespace RichRememberTheMilk.ViewModel
 			{
 				if (value != _Priority)
 				{
-					UIInvoker.Invoke(() =>
+					_Priority = value;
+					TriggerPropertyChanged("Priority");
+
+					/*UIInvoker.Invoke(() =>
 					{
 						_Priority = value;
 						TriggerPropertyChanged("Priority");
-					});
+					});*/
 				}
 			}
 		}

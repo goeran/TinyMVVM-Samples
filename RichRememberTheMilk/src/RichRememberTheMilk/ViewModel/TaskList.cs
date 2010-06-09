@@ -98,6 +98,7 @@ namespace RichRememberTheMilk.ViewModel
         {
             foreach (var task in Tasks)
                 task.IsSelected = false;
+            SelectAll.TriggerCanExecuteChanged();
         }
     }
 }

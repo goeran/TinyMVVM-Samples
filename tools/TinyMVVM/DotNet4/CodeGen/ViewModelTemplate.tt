@@ -44,11 +44,14 @@ public <#= property.Type#> <#= property.Name#>
 			{
 				if (value != _<#= property.Name#>)
 				{
-					UIInvoker.Invoke(() =>
+					_<#= property.Name#> = value;
+					TriggerPropertyChanged("<#= property.Name#>");
+
+					/*UIInvoker.Invoke(() =>
 					{
 						_<#= property.Name#> = value;
 						TriggerPropertyChanged("<#= property.Name#>");
-					});
+					});*/
 				}
 			}
 		}
